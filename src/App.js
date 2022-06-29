@@ -3,16 +3,22 @@ import './App.css';
 import { Component } from 'react';
 import { useState } from 'react';
 
-
+function MenuOption(props){
+  return(
+    <li><button className="navButton" OnClick={props.OnClick}>
+        
+        { props.name }
+      </button></li>
+    )
+  
+}
 class TopNav extends Component {
 
   renderNav(name){
     return(
-      <li><button className="navButton" onClick={this.props.OnClick}>
-        
-        { name }
-      </button></li>
+      <MenuOption name = { name } OnClick = {this.props.onClick} />
     )
+      
   }
   render(){
     return(
@@ -74,12 +80,12 @@ class App extends Component{
        changes the state of App 
     */ 
     this.setState({Page: "About"})
-  }
+  } 
   
   render(){
     return (
     <div className="App">
-    <TopNav OnClick={() => this.handleClick()}/>
+    <TopNav setValue = {() => this.handleClick} />
     <MainPage Page = {this.state.Page}/>
     </div>
     

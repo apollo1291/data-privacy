@@ -1,0 +1,103 @@
+
+.topnav {
+  position: sticky;
+  background-color: #03192d;
+  top: 0px;
+  display: flex;
+  margin: 0;
+  width: 100%;
+
+}
+
+
+.nav{
+  margin: 0;
+}
+.nav p{
+  display: inline;
+  margin: 0;
+  float: left;
+  color: #f2f2f2;
+  background-color: #03192d;
+  text-align: center;
+  padding: 14px 22px;
+  text-decoration: none;
+  font-size: 20px;
+  border-right: solid 1px;
+  border-color: #061422
+}
+.nav ul{
+  background-color: #03192d;
+  display: inline;
+  text-align: center;
+  margin: 0;
+}
+
+.nav li{
+  display: inline;
+  text-align: center;
+  margin: 0;
+  
+  
+  
+}
+.navButton{
+  background-color: #03192d;
+  text-align: center;
+  padding: 15.5px 10px;
+  font-size: 20px;
+  color: white;
+  border: none;
+}
+
+.nav ul li button:hover{
+  text-decoration: underline white;
+  cursor: pointer;
+}
+
+
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #005266;
+
+}
+
+
+
+
+/* Right-aligned section inside the top navigation */
+.topnav-right {
+  float: right;
+}
+
+.topnav input[type=text] {
+  float: right;
+  border-radius: 6px;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  border: none;
+  margin-top: 3%;
+  margin-right: 2%;
+  margin-left: 2%;
+  font-size: 17px;
+}
+
+/* Responsive navigation menu - display links on top of each other instead of next to each other (for mobile devices) */
+@media screen and (max-width: 600px) {
+
+  .topnav{
+    max-height: 10%;
+  }
+  .topnav a,
+  .topnav-right {
+    float: none;
+    display: block;
+    
+  }
+
+}
+
+
+
+
+

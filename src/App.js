@@ -5,22 +5,17 @@ import { useState } from 'react';
 
 function MenuOption(props){
   return(
-    <li><button className="navButton" OnClick={props.OnClick}>
+    <li><button className="navButton" onClick={props.onClick}>
         
         { props.name }
       </button></li>
     )
   
 }
-class TopNav extends Component {
+function TopNav(props){
 
-  renderNav(name){
-    return(
-      <MenuOption name = { name } OnClick = {this.props.onClick} />
-    )
-      
-  }
-  render(){
+
+  
     return(
       <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
@@ -29,8 +24,8 @@ class TopNav extends Component {
         <div class="nav">
           <p id="name"> Data-Link</p>
           <ul>
-            {this.renderNav("Home")}
-            {this.renderNav("About")}
+            <MenuOption name = {"Home"} onClick={props.onClick}/>
+            <MenuOption name = {"About"} onClick={props.onClick}/>
           </ul>
           
         </div>
@@ -38,61 +33,59 @@ class TopNav extends Component {
       </div>
       </>
     )
-  }
+
   
 }
-class MainPage extends Component{
+function MainPage(props){
   
 
-  renderState(){
+  const renderState = () => {
     /* 
       input: nothing
       return: html section of webpage
 
       decides which webpage to return based on the Page passed from App's state
     */
-    if (this.props.Page === "Home"){
+    if (props.Page === "Home"){
       return(
         <div class="urlsearch"> <p>hello</p></div>
       ) 
       }
-    if (this.props.Page === "About"){
+    if (props.Page === "About"){
       return(
         <div class="About"> hiiii </div>
       )
     } 
   }
 
-  render(){
+  
     return(
-      this.renderState()
+      renderState()
     )
   }
-}
-class App extends Component{
 
-  state = {Page: "Home"}
+function App(){
+
+  const [state, setState] = useState({Page: "Home"})
   
-  handleClick = () => {
+  const handleClick = () => {
     /* input: nothing
        return: nothing
 
        changes the state of App 
     */ 
-    this.setState({Page: "About"})
-  } 
+    setState({Page: "About"})
+  }
   
-  render(){
+  
     return (
     <div className="App">
-    <TopNav setValue = {() => this.handleClick} />
-    <MainPage Page = {this.state.Page}/>
+    <TopNav onClick={ handleClick }/>
+    <MainPage Page = {state.Page}/>
     </div>
-    
-    
-  );}
+      
+  )
 
 }
 
 export default App;
-

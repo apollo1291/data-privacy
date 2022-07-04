@@ -2,10 +2,24 @@ import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 import { useState } from 'react';
+import MainPage from './MainPage';
+
 
 function MenuOption(props){
+
+  const handleClick = () => {
+    /*
+     * Takes no arguments
+     * no return value
+     * Changes the Page state of the App webpage
+    
+    */
+    props.changePage({Page: props.name})
+
+  }
+
   return(
-    <li><button className="navButton" onClick={props.onClick}>
+    <li><button className="navButton" onClick={handleClick}>
         
         { props.name }
       </button></li>
@@ -14,7 +28,7 @@ function MenuOption(props){
 }
 function TopNav(props){
 
-
+    
   
     return(
       <>
@@ -24,8 +38,8 @@ function TopNav(props){
         <div class="nav">
           <p id="name"> Data-Link</p>
           <ul>
-            <MenuOption name = {"Home"} onClick={props.onClick}/>
-            <MenuOption name = {"About"} onClick={props.onClick}/>
+            <MenuOption name = {"Home"} changePage={props.changePage}/>
+            <MenuOption name = {"About"} changePage={props.changePage}/>
           </ul>
           
         </div>
@@ -36,51 +50,15 @@ function TopNav(props){
 
   
 }
-function MainPage(props){
-  
-
-  const renderState = () => {
-    /* 
-      input: nothing
-      return: html section of webpage
-
-      decides which webpage to return based on the Page passed from App's state
-    */
-    if (props.Page === "Home"){
-      return(
-        <div class="urlsearch"> <p>hello</p></div>
-      ) 
-      }
-    if (props.Page === "About"){
-      return(
-        <div class="About"> hiiii </div>
-      )
-    } 
-  }
-
-  
-    return(
-      renderState()
-    )
-  }
 
 function App(){
 
   const [state, setState] = useState({Page: "Home"})
   
-  const handleClick = () => {
-    /* input: nothing
-       return: nothing
-
-       changes the state of App 
-    */ 
-    setState({Page: "About"})
-  }
-  
   
     return (
     <div className="App">
-    <TopNav onClick={ handleClick }/>
+    <TopNav changePage = { setState }/>
     <MainPage Page = {state.Page}/>
     </div>
       

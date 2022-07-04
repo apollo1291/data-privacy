@@ -4,7 +4,7 @@ import Pages from './Pages'
  * Contains 
  */
 
-function MainPage(props){
+export function MainPage(props){
   
     const renderState = () => {
       /**
@@ -24,4 +24,3 @@ function MainPage(props){
       )
     }
 
-export default MainPage;

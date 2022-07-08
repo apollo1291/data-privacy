@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { Component, useEffect, useState } from 'react';
 import './Pages.css';
+
 /* 
  *  Contains the different component webpages 
     for the main part of the app, 
@@ -35,8 +36,7 @@ const Websites = [
 
 function Home() {
     const [state, setState] = useState({
-        Search: null,
-        SearhMatches: [null]
+        userSearch: null
     })
 
     const handleChange = (event) => {
@@ -47,11 +47,36 @@ function Home() {
         console.log("search bar says:", event.target.value)
 
 
-        let matchingSites = SearchForSite(event.target.value, Websites)
         // updates correctly 
-        setState({Search: event.target.value, 
-            SearhMatches: matchingSites})
+        setState({userSearch: event.target.value})
     }
+
+    return(
+        <>
+        <div id="frontpage" class="center-active">
+        <input type="text" placeholder="Enter Url" id="inp" onChange={event => handleChange(event)}></input><br></br>
+        <button type="button" id="btn"> Search </button>
+        </div>
+        <HomeSearchResults userSearch= {state.userSearch} />
+        </>
+        
+
+
+    )
+}
+
+function HomeSearchResults(userSearch) {
+    const [state, setSearch] = useState({
+        Search: userSearch.userSearch
+    })
+
+    useEffect(() => {
+        if (userSearch.userSearch === ''){
+            setSearch({Search: null})
+            return
+        }
+        
+        setSearch({Search: userSearch.userSearch})}, [userSearch.userSearch])
 
     const SearchForSite = (userSearch, websiteList) =>{
         /**
@@ -62,15 +87,11 @@ function Home() {
 
         // variable to hold any mathes
         let matches = [] 
-
+        
         // check each websites url and compare to input
         websiteList.forEach(element=> { 
 
-            /* Type errors here. userSearch and element['url'] are both 
-                strings. I know because of the print statements above
-            
-            */
-            if (element['url'].includes(userSearch)){
+            if (element['url'].indexOf(userSearch) !== -1){
                 matches.push(element)
             }
         });
@@ -79,15 +100,18 @@ function Home() {
 
     }
     const showSearch = (State) => {
+
         
-        if (State.SearhMatches = []){
+        let matches = SearchForSite(state['Search'], Websites)
+        
+        if (matches === []){
             return 
         }
         // isn't displaying the return div. dont know why
         return(
             <div>
-                {State.SearhMatches.map(site =>(
-                    <div className='sitebox'>
+                {matches.map(site =>(
+                    <div className='sitebox' key={site.url}>
                         <p className='holdsUrl'>{site.url}</p>
                         <p className='holdsRating'>{site.rating}</p>
                     </div>
@@ -96,16 +120,13 @@ function Home() {
         )
     }
 
+    
+
     return(
-       <>
-       <div id="frontpage" class="center-active">
-       <input type="text" placeholder="Enter Url" id="inp" onChange={event => handleChange(event)}></input><br></br>
-       <button type="button" id="btn"> Search </button>
-       </div>
-       { showSearch({state}) }
-       </>
-         
+        showSearch()
     )
+
+
 }
 
 function About() {

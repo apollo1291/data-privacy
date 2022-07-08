@@ -36,7 +36,7 @@ const Websites = [
 function Home() {
     const [state, setState] = useState({
         Search: null,
-        SearhMatches: []
+        SearhMatches: [null]
     })
 
     const handleChange = (event) => {

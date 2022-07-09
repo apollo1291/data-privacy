@@ -33,3 +33,35 @@
   button:hover {
     cursor: pointer;
   }
+
+  .body{
+    justify-content: center;
+  }
+  .searchResults {
+    margin: 0 auto;
+    background-color: bisque;
+    justify-content: center;
+    max-height: 20vh;
+    max-width: 50vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+  }
+  .sitebox {
+    text-align: center;
+    max-width: 50vh;
+    margin: 0 auto;
+    background-color: blue;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .holdsUrl {
+    text-align: left;
+    margin: 0px;
+    
+  }
+  .holdsRating {
+    margin: 0px;
+    text-align: right;
+  }

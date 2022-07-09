@@ -18,7 +18,7 @@ const Pages = {
 
 const Websites = [
     { 
-        url: "google.com",
+        url: "www.google.com",
         rating: 4
 
     },
@@ -28,8 +28,21 @@ const Websites = [
         rating: 5
     },
     {
-        url: 'amazon.com',
+        url: 'www.amazon.com',
         rating: 1
+    },
+    {
+        url: 'www.mcdonalds.com',
+        rating: 2
+    },
+    {
+        url: 'www.yahoo.com',
+        rating: 3.45
+    },
+    
+    {
+        url: 'www.bing.com',
+        rating: -4.1
     }
 
 ]
@@ -119,7 +132,7 @@ function HomeSearchResults(props) {
         }
 
         return(
-            <div>
+            <div className='searchResults'>
                 {matches.map(site =>(
                     <div className='sitebox' key={site.url}>
                         <p className='holdsUrl'>{site.url}</p>

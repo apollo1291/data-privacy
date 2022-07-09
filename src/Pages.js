@@ -42,12 +42,9 @@ function Home() {
     const handleChange = (event) => {
         /**
          * @params event -> an html event in the search bar, typing deleting etc
-         * @returns nothing -> but alters homes jsx return value to reflect what matches the search
+         * @returns nothing -> sets the state of the component to the search
          */
-        console.log("search bar says:", event.target.value)
 
-
-        // updates correctly 
         setState({userSearch: event.target.value})
     }
 
@@ -65,21 +62,29 @@ function Home() {
     )
 }
 
-function HomeSearchResults(userSearch) {
+function HomeSearchResults(props) {
     const [state, setSearch] = useState({
-        Search: userSearch.userSearch
+        Search: props.userSearch
     })
 
     useEffect(() => {
-        if (userSearch.userSearch === ''){
+        /**
+         * @param: nothing
+         * @return: nothing -> sets state to what the user is searching for 
+         */
+        // when the search bar is empty set Search state to null
+        // because '' will return a match to every string
+        if (props.userSearch === ''){
             setSearch({Search: null})
             return
         }
-        
-        setSearch({Search: userSearch.userSearch})}, [userSearch.userSearch])
+        // set the 
+        setSearch({Search: props.userSearch})}, [props.userSearch])
 
     const SearchForSite = (userSearch, websiteList) =>{
         /**
+         * Finds urls that the user could be searching for
+         * 
          * @param: Url -> input from the user searching for a website
          * @param: websiteList -> List of websites and corresponding data
          * @return: mathes -> any websites that match the users search 
@@ -91,23 +96,28 @@ function HomeSearchResults(userSearch) {
         // check each websites url and compare to input
         websiteList.forEach(element=> { 
 
-            if (element['url'].indexOf(userSearch) !== -1){
+            if (element['url'].includes(userSearch)){
                 matches.push(element)
             }
         });
-        console.log(matches[0])
         return matches 
 
     }
     const showSearch = (State) => {
-
+        /**
+         * Displays any matches to user search
+         * 
+         * @param: State -> the value of the search bar 
+         * @return: html 
+         */
         
+        // Get all of the urls that match the users search
         let matches = SearchForSite(state['Search'], Websites)
         
         if (matches === []){
             return 
         }
-        // isn't displaying the return div. dont know why
+
         return(
             <div>
                 {matches.map(site =>(

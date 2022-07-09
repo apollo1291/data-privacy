@@ -1,8 +1,8 @@
 import logo from './logo.svg';
 import { Component } from 'react';
 import { useState } from 'react';
-import { MainPage } from './MainPage';
-import { TopNav } from './TopNav';
+import { MainPage } from './components/MainPage';
+import { TopNav } from './components/TopNav';
 
 
 function App(){

@@ -7,8 +7,8 @@
     "build": "webpack",
     "dev": "nodemon ./server.js localhost 3080"
   },
-  
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.18.1"
   },
   "devDependencies": {
@@ -16,4 +16,3 @@
     "webpack": "^4.43.0"
   }
 }
-

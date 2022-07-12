@@ -1,4 +1,5 @@
 import { Component, useEffect, useState } from 'react';
+import { authUser } from '../services/users';
 import './Pages.css';
 
 /* 
@@ -156,6 +157,49 @@ function About() {
 
     return (
         <div class="About"> About </div>
+    )
+}
+
+export function LoginPage(props){
+    const [user, setUser] = useState({
+        username: null,
+        password: null
+    })
+    const handleChange = (event) => {
+        if (event.target.id === 'userlogin'){
+         setUser({...user, username: event.target.value } )
+        }
+        else if(event.target.id === 'passlogin'){
+         setUser({...user, password: event.target.value})}
+         
+
+    }
+    const handleSubmit = async () => {
+        const auth = await authUser(user.username, user.password)
+        console.log(auth)
+        if(auth){
+        
+        props.setAppState({...props.appState, user: user.username})
+    }
+    else{
+        alert("invalid username or password")
+    }
+
+        
+    }
+    return(
+        <>
+        <label>Username:
+        <input id='userlogin' type='text' placeholder='Enter email' onChange={event => handleChange(event)}></input>
+        </label>
+        <label>Password:
+        <input id='passlogin' type='text' placeholder='Enter password' onChange={event => handleChange(event)}></input>
+        </label>
+        <button onClick={() => handleSubmit()}/>
+        
+        </>
+        
+        
     )
 }
 

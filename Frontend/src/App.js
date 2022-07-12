@@ -4,24 +4,27 @@ import { useState } from 'react';
 import { MainPage } from './components/MainPage';
 import { TopNav } from './components/TopNav';
 import { getAllUsers } from './services/users';
+import { LoginPage } from './components/Pages'
 
 
 function App(){
 
-  const [state, setState] = useState({Page: "Home"})
-  useEffect(() => {
-    getAllUsers().then(users => {console.log(users)}
-    )})
+  const [state, setState] = useState({Page: "Home",
+user: null})
   
     
-
-    return (
-    <div className="App">
-    <TopNav changePage = { setState }/>
-    <MainPage Page = {state.Page}/>
-    </div>
-      
-  )
+    if (state.user){
+      return (
+      <div className="App">
+      <TopNav changePage = { setState }/>
+      <MainPage Page = {state.Page}/>
+      </div>
+        
+    )}
+    
+    return(
+      <LoginPage appState = { state } setAppState = { setState }/>
+    )
 
 }
 

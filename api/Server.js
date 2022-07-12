@@ -11,20 +11,9 @@ const app = express(),
     });
 
 const users = [{
-    firstName: "first1",
-    lastName: "last1",
-    email: "abc@gmail.com"
-  },
-  {
-    firstName: "first2",
-    lastName: "last2",
-    email: "abc@gmail.com"
-  },
-  {
-    firstName: "first3",
-    lastName: "last3",
-    email: "abc@gmail.com"
-  }] 
+    username: 'pie',
+    password: 'apple'
+}] 
 
 app.use(bodyParser.json())
 app.use(cors());
@@ -33,3 +22,9 @@ app.get('/api/users', (req, res) => {
     console.log('app.get(api/users...) called')
     res.json(users)
     })
+
+app.post('/api/user', (req, res) => {
+    const user = req.body.user
+    users.push(user)
+    res.json("added")
+})

@@ -18,8 +18,8 @@ export function TopNav(props) {
         <div class="nav">
           <p id="name"> Data-Link</p>
           <ul>
-            <MenuOption name={"Home"} changePage={props.changePage} />
-            <MenuOption name={"About"} changePage={props.changePage} />
+            <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} />
+            <MenuOption name={"About"} appState = { props.appState } changePage={props.changePage} />
           </ul>
 
         </div>
@@ -44,7 +44,7 @@ function MenuOption(props) {
      * @param: { none }
      * @return: { none }
     */
-    props.changePage({ Page: props.name });
+    props.changePage({...props.appState, Page: props.name });
 
   };
 

@@ -16,7 +16,7 @@ user: null})
     if (state.user){
       return (
       <div className="App">
-      <TopNav changePage = { setState }/>
+      <TopNav appState = { state } changePage = { setState }/>
       <MainPage Page = {state.Page}/>
       </div>
         

@@ -166,6 +166,10 @@ export function LoginPage(props){
         password: null
     })
     const handleChange = (event) => {
+        /**
+         * @param: event -> user typing on the keyboard
+         * @return: nothing -> sets the state of the login page to the current login values 
+         */
         if (event.target.id === 'userlogin'){
          setUser({...user, username: event.target.value } )
         }
@@ -175,8 +179,11 @@ export function LoginPage(props){
 
     }
     const handleSubmit = async () => {
+        /**
+         * @return: nothing -> checks if the user entered username and password is valid,
+         *  if valid it logs into the app, if not it alerts the user 
+         */
         const auth = await authUser(user.username, user.password)
-        console.log(auth)
         if(auth){
         
         props.setAppState({...props.appState, user: user.username})

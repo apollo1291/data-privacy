@@ -1,5 +1,5 @@
 import { Component, useEffect, useState } from 'react';
-import { authUser } from '../services/users';
+import { authUser, createUser, validateEmail} from '../services/users';
 import './Pages.css';
 
 /* 
@@ -17,36 +17,6 @@ const Pages = {
     "About": <About />
 }
 
-const Websites = [
-    { 
-        url: "www.google.com",
-        rating: 4
-
-    },
-
-    {
-        url: 'www.mit.edu',
-        rating: 5
-    },
-    {
-        url: 'www.amazon.com',
-        rating: 1
-    },
-    {
-        url: 'www.mcdonalds.com',
-        rating: 2
-    },
-    {
-        url: 'www.yahoo.com',
-        rating: 3.45
-    },
-    
-    {
-        url: 'www.bing.com',
-        rating: -4.1
-    }
-
-]
 
 function Home() {
     const [state, setState] = useState({
@@ -58,13 +28,12 @@ function Home() {
          * @params event -> an html event in the search bar, typing deleting etc
          * @returns nothing -> sets the state of the component to the search
          */
-
         setState({userSearch: event.target.value})
     }
 
     return(
         <>
-        <div id="frontpage" class="center-active">
+        <div id="frontpage" className="center-active">
         <input type="text" placeholder="Enter Url" id="inp" onChange={event => handleChange(event)}></input><br></br>
         <button type="button" id="btn"> Search </button>
         </div>
@@ -83,9 +52,16 @@ function HomeSearchResults(props) {
 
     useEffect(() => {
         /**
+         * sets state to what the user is searching for
+         * after the component has rendered
          * @param: nothing
-         * @return: nothing -> sets state to what the user is searching for 
+         * @return: nothing 
          */
+        
+        if (props.userSearch === null){
+            return
+        }
+
         // when the search bar is empty set Search state to null
         // because '' will return a match to every string
         if (props.userSearch === ''){
@@ -95,7 +71,7 @@ function HomeSearchResults(props) {
         // set the 
         setSearch({Search: props.userSearch})}, [props.userSearch])
 
-    const SearchForSite = (userSearch, websiteList) =>{
+    const SearchForSite = async (userSearch) =>{
         /**
          * Finds urls that the user could be searching for
          * 
@@ -104,8 +80,14 @@ function HomeSearchResults(props) {
          * @return: mathes -> any websites that match the users search 
          */
 
+        // request the website data from the backend
+        const websites = await fetch('http://localhost:3080/api/websites')
+        const websiteList = await websites.json()
+
         // variable to hold any mathes
         let matches = [] 
+
+        
         
         // check each websites url and compare to input
         websiteList.forEach(element=> { 
@@ -117,31 +99,49 @@ function HomeSearchResults(props) {
         return matches 
 
     }
-    const showSearch = (State) => {
+    const showSearch = () => {
         /**
          * Displays any matches to user search
          * 
-         * @param: State -> the value of the search bar 
+         * 
          * @return: html 
          */
         
-        // Get all of the urls that match the users search
-        let matches = SearchForSite(state['Search'], Websites)
-        
-        if (matches === []){
-            return 
-        }
+        let matchToDisplay = false
+        let matches;
 
-        return(
-            <div className='searchResults'>
-                {matches.map(site =>(
-                    <div className='sitebox' key={site.url}>
-                        <p className='holdsUrl'>{site.url}</p>
-                        <p className='holdsRating'>{site.rating}</p>
-                    </div>
-                ))}
-            </div>
-        )
+        // avoid unnessary server calls from SearchForSite in intial render
+        if (state.Search === null){
+            return
+        }
+        
+        // Get all of the urls that match the users search
+        SearchForSite(state.Search).then((m) =>{
+            console.log(m)
+            matches = m
+            // after the promise for matches is fulfilled return the appropriate jsx
+            if (m === []){
+                return 
+            }
+            else{
+                matchToDisplay = true
+            }
+    
+                    })
+        
+        if (matchToDisplay){
+            return(
+                <div className='searchResults'>
+                    {matches.map(site =>(
+                        <div className='sitebox' key={site.url}>
+                            <p className='holdsUrl'>{site.url}</p>
+                            <p className='holdsRating'>{site.rating}</p>
+                        </div>
+                    ))}
+                </div>
+            )
+        }
+        
     }
 
     
@@ -165,10 +165,29 @@ export function LoginPage(props){
         username: null,
         password: null
     })
-    const handleChange = (event) => {
+    const [Page, setPage] = useState({
+        Login: true
+    })
+
+    const swapPage = () => {
         /**
+         * swaps the component between sign up and login pages
+         * 
+         * @param: nothing
+         * @return: nothing 
+         */
+        const defaultSetting = {
+            username: null,
+            password: null}
+        const currentPage = Page.Login
+        setPage({Login: !currentPage})
+        setUser(defaultSetting)
+    }
+    const handleLoginChange = (event) => {
+        /**
+         * sets the state of the login page to the values the user entered
          * @param: event -> user typing on the keyboard
-         * @return: nothing -> sets the state of the login page to the current login values 
+         * @return: nothing 
          */
         if (event.target.id === 'userlogin'){
          setUser({...user, username: event.target.value } )
@@ -178,10 +197,12 @@ export function LoginPage(props){
          
 
     }
-    const handleSubmit = async () => {
+    const handleLoginSubmit = async () => {
         /**
-         * @return: nothing -> checks if the user entered username and password is valid,
-         *  if valid it logs into the app, if not it alerts the user 
+         * checks if the user entered username and password is valid,
+         * if valid it logs into the app, if not it alerts the user
+         * 
+         * @return: nothing  
          */
         const auth = await authUser(user.username, user.password)
         if(auth){
@@ -194,20 +215,69 @@ export function LoginPage(props){
 
         
     }
+
+    const handleSignUpChange = (event) => {
+
+        if(event.target.id === 'setEmail'){
+            setUser({...user, Email: event.target.value } )
+        }
+
+        if (event.target.id === 'setUser'){
+            setUser({...user, username: event.target.value } )
+           }
+
+        if(event.target.id === 'setPass'){
+            setUser({...user, password: event.target.value})}
+        
+    }
+
+    const handleSignUp = async () => {
+       if (validateEmail(user.Email)){
+         await createUser(user)
+         props.setAppState({...props.appState, user: user.username})
+        }
+        else{
+            alert('invalid sign up: check if email and password are valid')
+        }
+    }
+    if (Page.Login){
     return(
         <>
+        <div id='form'>
         <label>Username:
-        <input id='userlogin' type='text' placeholder='Enter email' onChange={event => handleChange(event)}></input>
+        <input id='userlogin' type='text' placeholder='Enter username' onChange={event => handleLoginChange(event)}></input>
         </label>
         <label>Password:
-        <input id='passlogin' type='text' placeholder='Enter password' onChange={event => handleChange(event)}></input>
+        <input id='passlogin' type='text' placeholder='Enter password' onChange={event => handleLoginChange(event)}></input>
         </label>
-        <button onClick={() => handleSubmit()}/>
-        
+        <button onClick={() => handleLoginSubmit()}> Login </button>
+        </div>
+
+        <button onClick={() => swapPage()}> Sign Up </button>
         </>
         
         
-    )
+    )}
+    if (!Page.Login){
+        return(
+            <>
+            <div id='form'>
+            <label>Email:
+            <input id='setEmail' type='text' placeholder='Set Email' onChange={event => handleSignUpChange(event)}></input>
+            </label>
+            <label>Username:
+            <input id='setUser' type='text' placeholder='Set username' onChange={event => handleSignUpChange(event)}></input>
+            </label>
+            <label>Password:
+            <input id='setPass' type='text' placeholder='Set password' onChange={event => handleSignUpChange(event)}></input>
+            </label>
+            <button onClick={() => handleSignUp()}> Sign up </button>
+            </div>
+
+            <button onClick={() => swapPage()}> Login </button>
+            </>
+        )
+    }
 }
 
 export default Pages

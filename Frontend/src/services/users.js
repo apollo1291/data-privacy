@@ -1,5 +1,5 @@
 
-export async function getAllUsers() {
+async function getAllUsers() {
     /**
      * @return: -> a promise, when fulfilled returns a list containing all user profiles
      */
@@ -8,7 +8,7 @@ export async function getAllUsers() {
     return await response.json();
 }
 
-export async function createUser(data){
+ export async function createUser(data){
     const reponse = await fetch('http://localhost:3080/api/user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -33,5 +33,14 @@ export async function authUser(username, password) {
     }}
     return false
 }
+export function validateEmail(email){
+    return String(email).toLowerCase().match(
+        /\S+@\S+\.\S+/
+    );
+}
+
+
+
+
 
 

@@ -13,9 +13,9 @@ export function TopNav(props) {
   return (
     <>
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
-      <div class="topnav">
+      <div className='topnav'>
 
-        <div class="nav">
+        <div className='nav'>
           <p id="name"> Data-Link</p>
           <ul>
             <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} />

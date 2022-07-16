@@ -1,5 +1,5 @@
 import { Component, useEffect, useState } from 'react';
-import { authUser, createUser, validateEmail} from '../services/users';
+import { authUser, createUser, validateEmail} from '../services/FrontendUsers';
 import './Pages.css';
 
 /* 
@@ -58,8 +58,11 @@ function HomeSearchResults(props) {
          * @return: nothing 
          */
         
+        
         if (props.userSearch === null){
+            
             return
+            
         }
 
         // when the search bar is empty set Search state to null
@@ -107,6 +110,7 @@ function HomeSearchResults(props) {
          * @return: html 
          */
         
+        // to bring the scope outside of the .then statement later in the function
         let matchToDisplay = false
         let matches;
 
@@ -116,11 +120,11 @@ function HomeSearchResults(props) {
         }
         
         // Get all of the urls that match the users search
-        SearchForSite(state.Search).then((m) =>{
-            console.log(m)
-            matches = m
+        SearchForSite(state.Search).then((listOfMatches) =>{
+            
+            matches = listOfMatches
             // after the promise for matches is fulfilled return the appropriate jsx
-            if (m === []){
+            if (listOfMatches === []){
                 return 
             }
             else{
@@ -219,7 +223,7 @@ export function LoginPage(props){
     const handleSignUpChange = (event) => {
 
         if(event.target.id === 'setEmail'){
-            setUser({...user, Email: event.target.value } )
+            setUser({...user, email: event.target.value } )
         }
 
         if (event.target.id === 'setUser'){
@@ -232,13 +236,22 @@ export function LoginPage(props){
     }
 
     const handleSignUp = async () => {
-       if (validateEmail(user.Email)){
-         await createUser(user)
-         props.setAppState({...props.appState, user: user.username})
-        }
-        else{
+        if (!validateEmail(user.email)){
             alert('invalid sign up: check if email and password are valid')
+            return
         }
+
+        const registrationWorked = await createUser(user)
+
+        if(!registrationWorked){
+            alert('There was a false return from our servers. Please check if your email and password are valid')
+            return
+        }
+
+        props.setAppState({...props.appState, user: user.username})
+        
+
+
     }
     if (Page.Login){
     return(

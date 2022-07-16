@@ -3,7 +3,7 @@ import { Component, useEffect } from 'react';
 import { useState } from 'react';
 import { MainPage } from './components/MainPage';
 import { TopNav } from './components/TopNav';
-import { getAllUsers } from './services/users';
+import { getAllUsers } from './services/FrontendUsers';
 import { LoginPage } from './components/Pages'
 
 

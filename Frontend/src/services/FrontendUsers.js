@@ -9,11 +9,12 @@ async function getAllUsers() {
 }
 
  export async function createUser(data){
-    const reponse = await fetch('http://localhost:3080/api/user', {
+    const response = await fetch('http://localhost:3080/api/user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({user: data})
       })
+    return await response.json()
 }
 
 export async function authUser(username, password) {

@@ -1,5 +1,5 @@
 
-
+const validation = require('./BackendUsers')
 const express = require('express');
 const cors = require('cors');
 const app = express(),
@@ -56,13 +56,21 @@ app.get('/api/users', (req, res) => {
 
 app.post('/api/user', (req, res) => {
     const user = req.body.user
-    users.push(user)
-    res.json("added")
+    console.log(user)
+    if (validation.isValidEmail(user['email']) && validation.isValidPassword(user['password'])){
+        users.push(user)
+        console.log(users)
+        res.json(true)
+
+    }
+    else{
+        res.json(false)
+    }
+    
 })
-let counter = 0
+
 app.get('/api/websites', (req, res) => {
-    console.log('app.get(api/websites...) called', counter )
-    counter++
+    console.log('app.get(api/websites...) called')
 
     res.json(Websites)
 })

@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { authUser, createUser, validateEmail} from '../services/FrontendUsers';
 import './Pages.css';
 
@@ -46,63 +46,45 @@ function Home() {
 }
 
 function HomeSearchResults(props) {
-    const [state, setSearch] = useState({
-        Search: props.userSearch
+    const [state, setState] = useState({
+        results: null
     })
+    
 
     useEffect(() => {
-        /**
-         * sets state to what the user is searching for
-         * after the component has rendered
-         * @param: nothing
-         * @return: nothing 
-         */
-        
-        
-        if (props.userSearch === null){
+        const SearchForSite = async (userSearch) =>{
+            /**
+             * Finds urls that the user could be searching for
+             * 
+             * @param: Url -> input from the user searching for a website
+             * @param: websiteList -> List of websites and corresponding data
+             * @return: mathes -> any websites that match the users search 
+             */
+    
+            // request the website data from the backend
+            const websites = await fetch('http://localhost:3080/api/websites')
+            const websiteList = await websites.json()
+    
+            // variable to hold any mathes
+            let matches = [] 
+    
             
-            return
             
+            // check each websites url and compare to input
+            websiteList.forEach(element=> { 
+    
+                if (element['url'].includes(userSearch)){
+                    matches.push(element)
+                }
+            });
+            setState({results: matches})
+    
         }
+        SearchForSite(props.userSearch)
+            }, [props.userSearch])
 
-        // when the search bar is empty set Search state to null
-        // because '' will return a match to every string
-        if (props.userSearch === ''){
-            setSearch({Search: null})
-            return
-        }
-        // set the 
-        setSearch({Search: props.userSearch})}, [props.userSearch])
-
-    const SearchForSite = async (userSearch) =>{
-        /**
-         * Finds urls that the user could be searching for
-         * 
-         * @param: Url -> input from the user searching for a website
-         * @param: websiteList -> List of websites and corresponding data
-         * @return: mathes -> any websites that match the users search 
-         */
-
-        // request the website data from the backend
-        const websites = await fetch('http://localhost:3080/api/websites')
-        const websiteList = await websites.json()
-
-        // variable to hold any mathes
-        let matches = [] 
-
-        
-        
-        // check each websites url and compare to input
-        websiteList.forEach(element=> { 
-
-            if (element['url'].includes(userSearch)){
-                matches.push(element)
-            }
-        });
-        return matches 
-
-    }
-    const showSearch = () => {
+    
+    const showSearch = (matches) => {
         /**
          * Displays any matches to user search
          * 
@@ -110,30 +92,6 @@ function HomeSearchResults(props) {
          * @return: html 
          */
         
-        // to bring the scope outside of the .then statement later in the function
-        let matchToDisplay = false
-        let matches;
-
-        // avoid unnessary server calls from SearchForSite in intial render
-        if (state.Search === null){
-            return
-        }
-        
-        // Get all of the urls that match the users search
-        SearchForSite(state.Search).then((listOfMatches) =>{
-            
-            matches = listOfMatches
-            // after the promise for matches is fulfilled return the appropriate jsx
-            if (listOfMatches === []){
-                return 
-            }
-            else{
-                matchToDisplay = true
-            }
-    
-                    })
-        
-        if (matchToDisplay){
             return(
                 <div className='searchResults'>
                     {matches.map(site =>(
@@ -146,12 +104,14 @@ function HomeSearchResults(props) {
             )
         }
         
-    }
-
     
 
+    if (state.results === null){
+        return
+    }
+
     return(
-        showSearch()
+        showSearch(state.results)
     )
 
 
@@ -256,17 +216,33 @@ export function LoginPage(props){
     if (Page.Login){
     return(
         <>
+        <div className='page'>
         <div id='form'>
-        <label>Username:
-        <input id='userlogin' type='text' placeholder='Enter username' onChange={event => handleLoginChange(event)}></input>
-        </label>
-        <label>Password:
-        <input id='passlogin' type='text' placeholder='Enter password' onChange={event => handleLoginChange(event)}></input>
-        </label>
-        <button onClick={() => handleLoginSubmit()}> Login </button>
+        <h1>Datalink</h1>
+        <div className='label'>
+            <label>Username:</label>
+            </div>
+            <div className='loginField'>
+                <input id='userlogin' type='text' placeholder='Enter username' onChange={event => handleLoginChange(event)}></input>
+            </div>
+        
+            <div className='label'>
+                <label>Password:</label>
+            </div>
+            <div className='loginField'>
+                <input id='passlogin' type='text' placeholder='Enter password' onChange={event => handleLoginChange(event)}></input>
+            </div>
+        
+            <button onClick={() => handleLoginSubmit()}> Login </button>
+            <div id='switch'>
+                <p>Not a registered user, yet?</p>
+                <p id='signup'onClick={() => swapPage()}> Sign Up </p>
+            </div>
+        
+        </div>
         </div>
 
-        <button onClick={() => swapPage()}> Sign Up </button>
+        
         </>
         
         
@@ -274,23 +250,43 @@ export function LoginPage(props){
     if (!Page.Login){
         return(
             <>
-            <div id='form'>
-            <label>Email:
-            <input id='setEmail' type='text' placeholder='Set Email' onChange={event => handleSignUpChange(event)}></input>
-            </label>
-            <label>Username:
-            <input id='setUser' type='text' placeholder='Set username' onChange={event => handleSignUpChange(event)}></input>
-            </label>
-            <label>Password:
-            <input id='setPass' type='text' placeholder='Set password' onChange={event => handleSignUpChange(event)}></input>
-            </label>
-            <button onClick={() => handleSignUp()}> Sign up </button>
+        <div className='page'>
+        <div id='form'>
+            <h1>Datalink</h1>
+            <div className='label'>
+                <label>Set Email:</label>
             </div>
+            <div className='loginField'>
+                <input id='setEmail' type='text' placeholder='abc@gmail.com' onChange={event => handleSignUpChange(event)}></input>
+            </div>
+        <div className='label'>
+            <label>Set Username:</label>
+            </div>
+            <div className='loginField'>
+                <input id='setUser' type='text' placeholder='Person123' onChange={event => handleSignUpChange(event)}></input>
+            </div>
+        
+            <div className='label'>
+                <label>Password:</label>
+            </div>
+            <div className='loginField'>
+                <input id='setPass' type='text' placeholder='Enter password' onChange={event => handleSignUpChange(event)}></input>
+            </div>
+        
+            <button onClick={() => handleSignUp()}> Sign Up </button>
+            <div id='switch'>
+                <p>Already registered?</p>
+                <p id='signup'onClick={() => swapPage()}> Login </p>
+            </div>
+        
+        </div>
+        </div>
 
-            <button onClick={() => swapPage()}> Login </button>
-            </>
+        
+        </>
         )
     }
 }
+
 
 export default Pages

@@ -1,9 +1,10 @@
 #inp {
-    border-radius: 25px;
+    font-family: Proxima Nova;
+    border-radius: 10px;
     border: 2px solid #000;
     padding: 8px;
     margin-bottom: 20px;
-    width: 200px;
+    width: 40vh;
     height: 15px;
   }
   /* Center the main div of each page*/
@@ -18,7 +19,7 @@
   
   button {
     padding: 10px 10px;
-    background-color: #03192d;
+    background-color: black;
     color: white;
     border: none;
     border-radius: 7px;
@@ -39,21 +40,35 @@
   }
   .searchResults {
     margin: 0 auto;
-    background-color: bisque;
     justify-content: center;
     max-height: 20vh;
-    max-width: 50vh;
+    max-width: 70vh;
     overflow-x: hidden;
     overflow-y: auto;
-
   }
+  .searchResults::-webkit-scrollbar {
+    display: none;
+  }
+  .searchResults:hover{
+    overflow-x: visible;
+    max-width: 83vh;
+  }
+
   .sitebox {
+    transition: 0.8s;
     text-align: center;
-    max-width: 50vh;
+    max-width: 70vh;
     margin: 0 auto;
-    background-color: blue;
     margin-top: 0;
     margin-bottom: 0;
+
+  }
+  .sitebox:hover{
+    max-width: 82vh;
+    width: 80vh;
+    border-radius: 5px;
+    background-image: linear-gradient(rgb(255, 255, 255), rgb(141, 141, 145));
+    box-shadow:  0 8px 2px -5px rgb(69, 69, 70);
   }
 
   .holdsUrl {
@@ -76,6 +91,7 @@
     justify-content: center;
     max-height: 100%;
     padding: 20vh;
+    background-image: radial-gradient( white, black);
   
 }
 
@@ -129,6 +145,11 @@
     font-family: Proxima Nova;
     font-size: xx-large;
 
+  }
+  #form img{
+    height: 1em;
+    width: 1em;
+    
   }
 
   .label{

@@ -16,10 +16,11 @@ export function TopNav(props) {
       <div className='topnav'>
 
         <div className='nav'>
-          <p id="name"> Data-Link</p>
+          <p id="name"><img src={require("../databaseWhite.png") } alt=''></img>Data-Link</p>
           <ul>
             <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} />
             <MenuOption name={"About"} appState = { props.appState } changePage={props.changePage} />
+  
           </ul>
 
         </div>

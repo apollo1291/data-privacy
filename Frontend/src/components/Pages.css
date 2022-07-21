@@ -115,7 +115,8 @@
     -webkit-appearance: none;
     width: 89.4%;
     line-height: 1.21428571em;
-    padding: 5.3% 1em;
+    padding: 5.3% 2vh;
+    margin-bottom: 2vh;
     font-size: 1em;
     background: #fff;
     border: 1px solid rgba(34,36,38,.15);

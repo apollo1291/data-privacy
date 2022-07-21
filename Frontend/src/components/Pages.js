@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { authUser, createUser, validateEmail} from '../services/FrontendUsers';
 import './Pages.css';
+import database from '../database.svg'
+import logo from '../logo.svg';
 
 /* 
  *  Contains the different component webpages 
@@ -216,6 +218,7 @@ export function LoginPage(props){
     if (Page.Login){
     return(
         <>
+        
         <div className='page'>
         <div id='form'>
         <h1>Datalink</h1>

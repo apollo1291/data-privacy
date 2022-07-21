@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { authUser, createUser, validateEmail} from '../services/FrontendUsers';
 import './Pages.css';
-import database from '../database.svg'
-import logo from '../logo.svg';
+
+
+
 
 /* 
  *  Contains the different component webpages 
@@ -73,7 +74,11 @@ function HomeSearchResults(props) {
             
             
             // check each websites url and compare to input
-            websiteList.forEach(element=> { 
+            websiteList.forEach(element=> {
+                
+                if (userSearch === ''){
+                    return
+                }
     
                 if (element['url'].includes(userSearch)){
                     matches.push(element)
@@ -221,7 +226,7 @@ export function LoginPage(props){
         
         <div className='page'>
         <div id='form'>
-        <h1>Datalink</h1>
+        <h1><img src={require("../databaseWhite.png") } alt=''></img>Datalink</h1>
         <div className='label'>
             <label>Username:</label>
             </div>
@@ -255,7 +260,7 @@ export function LoginPage(props){
             <>
         <div className='page'>
         <div id='form'>
-            <h1>Datalink</h1>
+            <h1><img src={require("../databaseWhite.png") } alt=''></img>Datalink</h1>
             <div className='label'>
                 <label>Set Email:</label>
             </div>

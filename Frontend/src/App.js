@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { MainPage } from './components/MainPage';
 import { TopNav } from './components/TopNav';
-import { LoginPage } from './components/Pages'
+import { LoginPage } from './components/Login'
 
 
 function App(){

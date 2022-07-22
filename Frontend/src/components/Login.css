@@ -1,0 +1,105 @@
+html, body{
+    height: 100%;
+}
+
+.page{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-height: 100%;
+    padding: 20vh;
+    background-image: radial-gradient( white, black);
+  
+}
+
+#form {
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    width: 22%;
+    height: 100%;
+    flex-direction: column;
+    background-color: black;
+    border-radius: 15px;
+    min-width: 300px;
+    max-width: 360px;
+  }
+
+  #form button {
+    padding: 10px 10px;
+    width: 100%;
+    background-color: #03192d;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    text-align: center;
+    text-decoration: none;
+    font-size: large;
+    margin: 3%;
+    
+    
+  }
+  #form input{
+    font-family: Proxima Nova;
+    margin: 0;
+    outline: none;
+    -webkit-appearance: none;
+    width: 89.4%;
+    line-height: 1.21428571em;
+    padding: 5.3% 2vh;
+    margin-bottom: 2vh;
+    font-size: 1em;
+    background: #fff;
+    border: 1px solid rgba(34,36,38,.15);
+    color: rgba(0,0,0,.87);
+    border-radius: 0.28571429rem;
+  }
+
+  #form h1{
+    color: white;
+    font-family: Proxima Nova;
+    font-size: xx-large;
+
+  }
+  #form img{
+    height: 1em;
+    width: 1em;
+    
+  }
+
+  .label{
+    width: 100%;
+    padding-left: 5%;
+    text-align: left;
+    font-family: Proxima Nova;
+    font-size: large;
+    color: white;
+
+  }
+  .loginField{
+    width: 100%;
+    
+    text-align: left;
+  }
+
+  #switch{
+    background-color: white;
+    border-radius: 10px;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    font-family: Proxima Nova;
+    font-size: large;
+
+  }
+
+  #switch #signup{
+    color: #03192d;
+    text-decoration: underline
+  }
+
+  #switch #signup:hover{
+    cursor: pointer;
+  }

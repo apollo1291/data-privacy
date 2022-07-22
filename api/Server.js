@@ -1,5 +1,6 @@
 
-const validation = require('./BackendUsers')
+const validation = require('./BackendUsers');
+const website = require('./websiteManagement');
 const express = require('express');
 const cors = require('cors');
 const app = express(),
@@ -73,4 +74,12 @@ app.get('/api/websites', (req, res) => {
     console.log('app.get(api/websites...) called')
 
     res.json(Websites)
+})
+count = 0
+app.post('/api/websites', (req, res) => {
+    console.log('app.post(./api/websites...) called', count)
+    const userSearch = req.body.search
+    let matches = website.SearchSites(userSearch, Websites)
+    count += 1
+    res.json(matches)
 })

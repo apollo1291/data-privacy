@@ -64,7 +64,7 @@ function HomeSearchResults(props) {
              * @param: websiteList -> List of websites and corresponding data
              * @return: mathes -> any websites that match the users search 
              */
-    
+
             // request the website data from the backend
             const matches = await fetch('http://localhost:3080/api/websites', {
                 method: 'POST',

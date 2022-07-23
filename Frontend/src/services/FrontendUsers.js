@@ -1,12 +1,4 @@
 
-async function getAllUsers() {
-    /**
-     * @return: -> a promise, when fulfilled returns a list containing all user profiles
-     */
-
-    const response = await fetch('http://localhost:3080/api/users');
-    return await response.json();
-}
 
  export async function createUser(data){
     const response = await fetch('http://localhost:3080/api/user', {
@@ -17,7 +9,7 @@ async function getAllUsers() {
     return await response.json()
 }
 
-export async function authUser(username, password) {
+export async function authUser(data) {
     /**
      * @param: username -> the username to check against the list of registered usernames
      * @param: password -> the password to verify that username
@@ -25,14 +17,16 @@ export async function authUser(username, password) {
      * @return: boolean -> true if their exists a user with that username and password, false otherwise
      */
     
-    const users = await getAllUsers()
+    const response = await fetch("http://localhost:3080/api/auth", {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({user: data})
+    })
+
+    const user = await response.json()
+
+    return user.length !== 0
     
-    for(let i = 0; i < users.length; i++){
-        if (users[i]['username'] === username && users[i]['password'] === password){
-        
-        return true
-    }}
-    return false
 }
 export function validateEmail(email){
     return String(email).toLowerCase().match(

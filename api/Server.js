@@ -1,6 +1,6 @@
 const express = require("express");
 const cors = require("cors");
-const validation = require("./BackendUsers");
+const validation = require("./userValidation");
 const website = require("./websiteManagement");
 const db = require("./userQueries");
 const app = express(),
@@ -11,12 +11,7 @@ app.listen(port, () => {
   console.log(`Server listening on the port::${port}`);
 });
 
-const users = [
-  {
-    username: "pie",
-    password: "apple",
-  },
-];
+
 
 const Websites = [
   {
@@ -50,25 +45,10 @@ const Websites = [
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get("/api/users", (req, res) => {
-  console.log("app.get(api/users...) called");
-  res.json(users);
-});
-
-app.post("/api/user", (req, res) => {
-  const user = req.body.user;
-  console.log(user);
-  if (
-    validation.isValidEmail(user["email"]) &&
-    validation.isValidPassword(user["password"])
-  ) {
-    users.push(user);
-    console.log(users);
-    res.json(true);
-  } else {
-    res.json(false);
-  }
-});
+app.get("/api/u", db.getUsers);
+app.get("/api/user/:id", db.selectUserById);
+app.post("/api/user", db.createUser);
+app.post("/api/auth", db.authUser);
 
 app.get("/api/websites", (req, res) => {
   console.log("app.get(api/websites...) called");
@@ -76,6 +56,7 @@ app.get("/api/websites", (req, res) => {
   res.json(Websites);
 });
 count = 0;
+
 app.post("/api/websites", (req, res) => {
   console.log("app.post(./api/websites...) called", count);
   const userSearch = req.body.search;
@@ -84,4 +65,4 @@ app.post("/api/websites", (req, res) => {
   res.json(matches);
 });
 
-app.get("/api/u", db.getUsers);
+

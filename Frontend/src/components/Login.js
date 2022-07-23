@@ -46,7 +46,8 @@ export function LoginPage(props){
          * 
          * @return: nothing  
          */
-        const auth = await authUser(user.username, user.password)
+        const auth = await authUser(user)
+        
         if(auth){
         
         props.setAppState({...props.appState, user: user.username})

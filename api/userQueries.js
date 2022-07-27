@@ -11,13 +11,15 @@ const pool = new Pool({
 
 const createUser = (req, res) => {
   const {username, email, password} = req.body.user
-  if (validation.isValidEmail(email) && validation.isValidPassword(password)){
+  const {isValidEmail, isValidPassword, isValidUsername} = validation
+
+  if (isValidEmail(email) && isValidUsername(username) && isValidPassword(password) ){
     pool.query('INSERT INTO users (username, email) VALUES ($1, $2) RETURNING *', [username, email], (error, results) => {
       if (error) {
         throw error
       }
 
-      res.status(201).send(`User added with ID: ${results.rows[0].id}`)
+      res.json(true)
     })
   } else{
     res.json(false)
@@ -42,15 +44,15 @@ const authUser = (req, res) =>{
     if (error){
       throw error
     }
-    
-    res.status(200).json(results.rows)
+    console.log(results.rows)
+    res.json(results.rows)
   })
 }
 
 
 // select a user from database
 const selectUserById = (req, res) => {
-  const {id} = req.params
+  const { id } = req.params
   console.log(id)
   
   pool.query("SELECT * From users WHERE id = $1", [id], (error, results) => {

@@ -3,6 +3,7 @@ from datetime import datetime
 from datetime import date
 from cookies_rating import *
 from get_site_data import sites
+from db_connection import connection
 import psycopg2
 
     
@@ -27,7 +28,7 @@ for i in range(len(ratings)):
         cookie_data.append(cookie)
 
 # open connection to datalink_api database to insert the webscraped data
-with psycopg2.connect(database="datalink_api", user='datalink', password='data', host='localhost', port= '5432') as conn:
+with psycopg2.connect(database=connection['database'], user=connection['user'], password=connection['password'], host=connection['host'], port= connection['port']) as conn:
 
     cursor = conn.cursor()
     # id here needs to match the website relational id 

@@ -32,10 +32,10 @@ export function LoginPage(props){
          * @return: nothing 
          */
         if (event.target.id === 'userlogin'){
-         setUser({...user, username: event.target.value } )
+         setUser({...user, username: event.target.value.trim() } )
         }
         else if(event.target.id === 'passlogin'){
-         setUser({...user, password: event.target.value})}
+         setUser({...user, password: event.target.value.trim()})}
          
 
     }
@@ -46,6 +46,7 @@ export function LoginPage(props){
          * 
          * @return: nothing  
          */
+        console.log(user)
         const auth = await authUser(user)
         
         if(auth){
@@ -68,15 +69,15 @@ export function LoginPage(props){
          */
 
         if(event.target.id === 'setEmail'){
-            setUser({...user, email: event.target.value } )
+            setUser({...user, email: event.target.value.trim() } )
         }
 
         if (event.target.id === 'setUser'){
-            setUser({...user, username: event.target.value } )
+            setUser({...user, username: event.target.value.trim() } )
            }
 
         if(event.target.id === 'setPass'){
-            setUser({...user, password: event.target.value})}
+            setUser({...user, password: event.target.value.trim() })}
         
     }
 

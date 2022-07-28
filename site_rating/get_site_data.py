@@ -1,7 +1,9 @@
 from selenium import webdriver
+import sys
+import time
 
 options = webdriver.ChromeOptions()
-options.add_argument('--headless')
+options.add_experimental_option('excludeSwitches', ['enable-logging'])
 
 def sites(SiteList):
     # open chrome automated, automatically close browser after with block
@@ -9,7 +11,14 @@ def sites(SiteList):
         data = []
 
         for site in SiteList:
-            browser.get(site)
+            try:
+                print(site)
+                browser.get(site)
+                time.sleep(2)
+            except KeyboardInterrupt:
+                sys.exit()
+            except:
+                continue
             c = browser.get_cookies()
             # scrape all of the cookies into a usable format
             cookie_info = [{'name': c['name'], 'secure': c['secure'], 'expires': c.get('expiry', False), 'httpOnly': c['httpOnly']} for c in c]

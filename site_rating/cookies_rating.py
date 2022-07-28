@@ -23,7 +23,12 @@ def cookie_expiration_rating(num):
     '''
     if (not num):
         return 0
-    dt = str(datetime.fromtimestamp(num)).split(" ")[0]
+    try:
+        dt = str(datetime.fromtimestamp(num)).split(" ")[0]
+    except OSError:
+        print(num)
+        
+        dt = str(datetime.fromtimestamp(num/1000)).split(" ")[0]
     today = str(date.today())
 
     d1 = datetime.strptime(dt, "%Y-%m-%d")

@@ -1,2 +1,2 @@
 # hide database details
-db_connection.env
+.env

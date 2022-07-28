@@ -25,7 +25,7 @@ Future features:
 This project is currently very dependent on my local machine and not ready for outside use. In the future, I will migrate database, and backend to a Web Server.
 
 ## To-do:
- - Add ability to clikc on sites to get in-depth cookie report, rather than just one dimensional rating
+ - Add ability to click on sites to get in-depth cookie report, rather than just one dimensional rating (build react page structure, and db query to get cookie info)
  - improve webscraping technique, (webdriver is slow, and not very dynamic), build feature to allow users to get cookie report on demand rather than only having access to sites that have been previously scraped
  - figure out how to prioritizes sql searches, all sites currently in form: `https://.*.[.com, .org, .edu, etc...]`, 
  need to prioritize searches in * region and if not enough results widen to the rest

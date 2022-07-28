@@ -53,6 +53,7 @@ with psycopg2.connect(database=connection['database'], user=connection['user'], 
         if (expires):
             try:
                 cookie['expires'] = str(datetime.fromtimestamp(expires))
+            # OSError occurs when expires is not in unix epoch time seconds or unix epoch time milliseconds
             except OSError:
                 cookie['expires'] = 'unknown'
         else:

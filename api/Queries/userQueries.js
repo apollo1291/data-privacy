@@ -1,4 +1,4 @@
-const validation = require('./userValidation')
+const validation = require('../userValidation')
 require('dotenv').config()
 
 const Pool = require("pg").Pool;

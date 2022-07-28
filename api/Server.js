@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
-const userQuery = require("./userQueries");
-const webQuery = require("./websiteQueries")
+const userQuery = require("./Queries/userQueries");
+const webQuery = require("./Queries/websiteQueries")
 const app = express(),
   bodyParser = require("body-parser");
 port = 3080;

@@ -4,7 +4,7 @@ A prototype for an app that serves as a data-privacy information hub
 
 ## Description
 
-Created using [Create-React-app](https://create-react-app.dev/). Built using ReactJS, express, NodeJS, and PostgresSQL
+Created using [Create-React-app](https://create-react-app.dev/). Built using ReactJS, Express, NodeJS, and PostgresSQL
 
 MY FIRST PROJECT!! Datalink is a full stack webapp, with hopes of being a one stop all for data privacy for organizations and individuals. Currently, it's pretty barebones, but looking forward to building!!
 

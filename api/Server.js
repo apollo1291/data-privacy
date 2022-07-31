@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const userQuery = require("./Queries/userQueries");
 const webQuery = require("./Queries/websiteQueries")
+const cookieQuery = require("./Queries/cookieQueries")
 const app = express(),
   bodyParser = require("body-parser");
 port = 3080;
@@ -22,6 +23,9 @@ app.post("/api/auth", userQuery.authUser);
 
 //websites
 app.post("/api/websites", webQuery.findWebsites)
+
+//cookies
+app.post("/api/cookies", cookieQuery.getCookies)
 
 app.get("/api/websites", (req, res) => {
   console.log("app.get(api/websites...) called");

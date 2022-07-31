@@ -13,14 +13,10 @@ import './Pages.css';
  *  to MainPages
 */
 
-const Pages = {
-    "Home": <Home />,
-    
-    "About": <About />
-}
 
 
-function Home() {
+
+const Home = (props) => {
     const [state, setState] = useState({
         userSearch: null
     })
@@ -39,7 +35,7 @@ function Home() {
         <input type="text" placeholder="Enter Url" id="inp" onChange={event => handleChange(event)}></input><br></br>
         <button type="button" id="btn"> Search </button>
         </div>
-        <HomeSearchResults userSearch= {state.userSearch} />
+        <HomeSearchResults userSearch= {state.userSearch} appState = { props.appState } setAppState = { props.setAppState }/>
         </>
         
 
@@ -47,7 +43,7 @@ function Home() {
     )
 }
 
-function HomeSearchResults(props) {
+const HomeSearchResults = (props) => {
     const [state, setState] = useState({
         results: null
     })
@@ -81,7 +77,9 @@ function HomeSearchResults(props) {
         SearchForSite(props.userSearch)
             }, [props.userSearch])
 
-    
+    const displayCookiePage = (url) => {
+        props.setAppState({...props.appState, Page: 'cookie', url: url})
+    }
     const showSearch = (matches) => {
         /**
          * Displays any matches to user search
@@ -93,7 +91,7 @@ function HomeSearchResults(props) {
             return(
                 <div className='searchResults'>
                     {matches.map(site =>(
-                        <div className='sitebox' key={site.url}>
+                        <div className='sitebox' key={site.url} onClick={() => displayCookiePage(site.url)}>
                             <p className='holdsUrl'>{site.url}</p>
                             <p className='holdsRating'>{site.rating}</p>
                         </div>
@@ -115,13 +113,31 @@ function HomeSearchResults(props) {
 
 }
 
-function About() {
+const About = () => {
 
     return (
         <div class="About"> About </div>
     )
 }
 
+const CookieReport = (props) => {
+    useEffect(() => {
+    const fetchCookies = async (url) => {
+        const cookies = await fetch("http://localhost:3080/api/cookies", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({url: url})
+        })
 
+        console.log(await cookies.json())
 
-export default Pages
+    }
+    fetchCookies(props.url)})
+
+    return(
+        <div></div>
+    )
+}
+
+export {About, Home, CookieReport}
+

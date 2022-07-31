@@ -1,4 +1,4 @@
-import Pages from './Pages'
+import {Home, About, CookieReport} from './Pages'
 
 /**
  * Contains component to control 
@@ -6,6 +6,12 @@ import Pages from './Pages'
  */
 
 export function MainPage(props){
+
+    const Pages ={
+      'Home': <Home appState = { props.appstate } setAppState = { props.setAppState } />,
+      'About': <About />,
+      'cookieReport': <CookieReport url = { props.appState.url }/>
+    }
   
     const renderState = () => {
       /**
@@ -16,8 +22,13 @@ export function MainPage(props){
        * @return: { html webpage } 
        * 
        * **/
+      if (!props.appState.url){
+        return Pages[props.appState.Page]
+      }
 
-      return Pages[props.Page]
+      return Pages['cookieReport']
+
+
     }
   
     

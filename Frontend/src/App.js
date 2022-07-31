@@ -7,21 +7,26 @@ import { LoginPage } from './components/Login'
 
 function App(){
 
-  const [state, setState] = useState({Page: "Home",
-user: null})
+  const [user, setUser] = useState({
+  user: null,
+})
+  const [state, setState] = useState({
+    Page: "Home",
+    url: null
+  })
   
     
-    if (state.user){
+    if (user.user){
       return (
       <div className="App">
       <TopNav appState = { state } changePage = { setState }/>
-      <MainPage Page = {state.Page}/>
+      <MainPage appState = { state } setAppState = { setState }/>
       </div>
         
     )}
     
     return(
-      <LoginPage appState = { state } setAppState = { setState }/>
+      <LoginPage appState = { user } setAppState = { setUser }/>
     )
 
 }

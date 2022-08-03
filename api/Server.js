@@ -23,15 +23,11 @@ app.post("/api/auth", userQuery.authUser);
 
 //websites
 app.post("/api/websites", webQuery.findWebsites)
+app.post("/api/ratings", webQuery.getRatings)
 
 //cookies
 app.post("/api/cookies", cookieQuery.getCookies)
 
-app.get("/api/websites", (req, res) => {
-  console.log("app.get(api/websites...) called");
-
-  res.json(Websites);
-});
 count = 0;
 
 

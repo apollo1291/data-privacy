@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { authUser, createUser, validateEmail} from '../services/FrontendUsers';
+import { authUser, createUser, validateEmail} from '../../services/FrontendUsers';
 import './Login.css'
 
 export function LoginPage(props){
@@ -54,7 +54,7 @@ export function LoginPage(props){
         if(auth.length !== 0){
 
         window.sessionStorage.setItem("user", JSON.stringify(auth))
-        props.setAppState({...props.appState, user: user.username})
+        props.setAppState({...props.appState, user: auth})
     }
     else{
         alert("invalid username or password")
@@ -113,7 +113,7 @@ export function LoginPage(props){
         
         <div className='page'>
         <div id='form'>
-        <h1><img src={require("../databaseWhite.png") } alt=''></img>Datalink</h1>
+        <h1><img src={require("../../databaseWhite.png") } alt=''></img>Datalink</h1>
         <div className='label'>
             <label>Username:</label>
             </div>
@@ -147,7 +147,7 @@ export function LoginPage(props){
             <>
         <div className='page'>
         <div id='form'>
-            <h1><img src={require("../databaseWhite.png") } alt=''></img>Datalink</h1>
+            <h1><img src={require("../../databaseWhite.png") } alt=''></img>Datalink</h1>
             <div className='label'>
                 <label>Set Email:</label>
             </div>

@@ -1,4 +1,6 @@
-import {Home, About, CookieReport} from './Pages'
+import { CookieReport } from "./pages/CookieReport"
+import { About } from "./pages/About"
+import { Home } from "./pages/Home"
 
 /**
  * Contains component to control 

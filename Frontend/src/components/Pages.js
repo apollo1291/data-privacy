@@ -95,7 +95,7 @@ const HomeSearchResults = (props) => {
                             <p className='holdsUrl'>{site.url}</p>
                             <p className='holdsRating'>{site.rating}</p>
                         </div>
-                    ))}
+                        ))}
                 </div>
             )
         }
@@ -121,21 +121,72 @@ const About = () => {
 }
 
 const CookieReport = (props) => {
+    const [cookieData, setCookies] = useState({
+
+    })
+    const [cookieRatings, setRatings] = useState({
+
+    })
     useEffect(() => {
     const fetchCookies = async (url) => {
-        const cookies = await fetch("http://localhost:3080/api/cookies", {
+        console.log("runs")
+        const cookieResponse = await fetch("http://localhost:3080/api/cookies", {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({url: url})
+        })
+        const ratingsResponse = await fetch("http://localhost:3080/api/ratings", {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({url: url})
         })
 
-        console.log(await cookies.json())
+        const cookies = await cookieResponse.json()
+        const ratings = await ratingsResponse.json()
+        console.log(cookies)
+        
+        setCookies({
+            cookies: cookies
+        })
+
+        setRatings({
+            ratings: ratings
+        })
 
     }
-    fetchCookies(props.url)})
+    fetchCookies(props.url)},  [props.url])
 
+    const showCookies= () => {
+        return(
+        
+        <>
+        <div>
+            {cookieRatings.ratings?.map(rating => (
+                <div key='ratings'>
+                    <p>{rating.cookie_number_rating}</p>
+                    <p>{rating.cookie_security_rating}</p>
+                    <p>{rating.cookie_expires_rating}</p>
+                </div>
+
+            ))}
+        </div>
+        <table id='cookies'>
+                <tbody>
+                    {cookieData.cookies?.map(cookie => (
+                        <tr key={cookie.name}>
+                            <td>{cookie.name}</td>
+                            <td key={cookie.name + ' secure'}>{String(cookie.secure)}</td>
+                            <td key={cookie.name + ' httponly'}>{String(cookie.httponly)}</td>
+                            <td key={cookie.name + ' expires'}>{cookie.expires}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
+        )
+    }
     return(
-        <div></div>
+        showCookies()
     )
 }
 

@@ -28,7 +28,6 @@ app.post("/api/ratings", webQuery.getRatings)
 //cookies
 app.post("/api/cookies", cookieQuery.getCookies)
 
-count = 0;
 
 
 

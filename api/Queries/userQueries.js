@@ -11,6 +11,11 @@ const pool = new Pool({
 });
 
 const createUser = (req, res) => {
+  /**
+   * @desc: creates a user in the datalink_api database in table 'users', checks for valid entries in the post request
+   * @param: res.body.user => an object containing username, email and password
+   * @return: a json object containing the created users username and id or false if the entries weren't valid
+   */
   const {username, email, password} = req.body.user
   const {isValidEmail, isValidPassword, isValidUsername} = validation
 
@@ -39,6 +44,11 @@ const getUsers = (req, res) => {
 };
 
 const authUser = (req, res) =>{
+  /**
+   * @desc: authorizes a user by querying datalink_api using there username and password
+   * @param: res.body.user => an object contains username and password
+   * @return:if authorized, a json object with the users username and id, otherwise an empty array
+   */
   const {username, password} = req.body.user
 
   pool.query("SELECT username, id FROM users WHERE username = $1 AND password = $2", [username, password], (error, results) => {
@@ -68,6 +78,11 @@ const selectUserById = (req, res) => {
 
 // delete a user from database
 const deleteUser = (req, res) => {
+  /**
+   * @desc: deletes a user from table users in datalink_api database
+   * @param: res.params.id the id of the user to delete
+   * @return: a confirmation that the user was deleted
+   */
 
   const { id } = req.params
   pool.query("Delete * from users Where id = $1", [id], (error, results) => {
@@ -82,6 +97,13 @@ const deleteUser = (req, res) => {
 
 // update a user in the database 
 const updateUser = (request, response) => {
+  /**
+   * @desc: deletes a user from table users in datalink_api database
+   * @param: res.params.id => the id of the user to delete
+   * @param: res.body => an object containing the username and email
+   * @return: a confirmation that the user was modified
+   */
+
   const id = parseInt(request.params.id)
   const { username, email } = request.body
 

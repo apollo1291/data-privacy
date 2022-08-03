@@ -15,12 +15,12 @@ const createUser = (req, res) => {
   const {isValidEmail, isValidPassword, isValidUsername} = validation
 
   if (isValidEmail(email) && isValidUsername(username) && isValidPassword(password) ){
-    pool.query('INSERT INTO users (username, email) VALUES ($1, $2) RETURNING *', [username, email], (error, results) => {
+    pool.query('INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING username, id', [username, email, password], (error, results) => {
       if (error) {
         throw error
       }
 
-      res.json(true)
+      res.json(results.rows)
     })
   } else{
     res.json(false)
@@ -45,7 +45,7 @@ const authUser = (req, res) =>{
     if (error){
       throw error
     }
-    console.log(results.rows)
+    
     res.json(results.rows)
   })
 }

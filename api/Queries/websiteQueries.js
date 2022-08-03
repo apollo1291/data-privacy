@@ -22,6 +22,17 @@ const findWebsites = (req, res) => {
     })
 }
 
+const getRatings = (req, res) => {
+    const url = req.body.url
+    pool.query('SELECT rating, cookie_number_rating, cookie_security_rating, cookie_expires_rating FROM websites WHERE url = $1', [url], (err, result) =>{
+        if(err){
+            throw err
+        }
+        res.status(200).json(result.rows)
+    })
+}
+
 module.exports ={
-    findWebsites
+    findWebsites,
+    getRatings
 }

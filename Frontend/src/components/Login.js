@@ -43,14 +43,17 @@ export function LoginPage(props){
         /**
          * checks if the user entered username and password is valid,
          * if valid it logs into the app, if not it alerts the user
+         * also adds the user to the session storage format 
+         * key: "user", value: [{username:"example", id: 123}]
          * 
          * @return: nothing  
          */
-        console.log(user)
+        
         const auth = await authUser(user)
-        
-        if(auth){
-        
+
+        if(auth.length !== 0){
+
+        window.sessionStorage.setItem("user", JSON.stringify(auth))
         props.setAppState({...props.appState, user: user.username})
     }
     else{
@@ -97,8 +100,9 @@ export function LoginPage(props){
             alert('There was a false return from our servers. Please check if your email and password are valid')
             return
         }
-
+        
         props.setAppState({...props.appState, user: user.username})
+
         
 
 

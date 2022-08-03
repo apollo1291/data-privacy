@@ -8,14 +8,13 @@ import { LoginPage } from './components/Login'
 function App(){
 
   const [user, setUser] = useState({
-  user: null,
+  user: window.sessionStorage.getItem("user"),
 })
   const [state, setState] = useState({
     Page: "Home",
     url: null
   })
   
-    
     if (user.user){
       return (
       <div className="App">

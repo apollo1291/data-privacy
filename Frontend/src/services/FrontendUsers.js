@@ -25,7 +25,7 @@ export async function authUser(data) {
 
     const user = await response.json()
 
-    return user.length !== 0
+    return user
     
 }
 export function validateEmail(email){

@@ -20,7 +20,9 @@ export const CookieReport = (props) => {
         return (
 
             <>
-                
+                    <div class='url'>
+                        <h1>{props.url}</h1>
+                    </div>
                     <div id='ratings-container'>
                     {cookieRatings.ratings?.map(rating => (
                         <div id ='ratings' key='ratings'>

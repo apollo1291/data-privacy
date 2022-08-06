@@ -21,8 +21,8 @@ const fetchRatings = async (url) => {
      /**
      * @desc: Sends a Post req containing the url in the body 
      * to /api/ratings and waits for a response from the server 
-     * @param: url -> the url the user selected
-     * @return: ratings -> an object containing the ratings associated with the url 
+     * @param: url => the url the user selected
+     * @return: ratings => an object containing the ratings associated with the url 
      */
   const ratingsResponse = await fetch("http://localhost:3080/api/ratings", {
     method: "POST",
@@ -35,7 +35,40 @@ const fetchRatings = async (url) => {
   return ratings;
 };
 
+const getColor = (rating) => {
+  /**
+   * @desc: chooses which color corresponds to a rating. green for good, yellow for mid, red for bad
+   * @param: rating => the rating to be colored
+   * @return: a string, the name or hex of the color. 'green', 'yellow', or 'red'
+   */
+  rating = parseInt(rating)
+  if (rating > 22){
+    return 'green'
+  }
+
+  if (rating > 11){
+    // yellow is to 
+    return '#eed202'
+  }
+
+  return 'red'
+}
+
+const getWidth = (rating) => {
+  /**
+   * @desc: provdies the width, in percentage,for a rating bar
+   * @param: rating => the rating to assess
+   * @return: a string, a width in percentage
+   */
+
+  rating = parseInt(rating)
+
+  return (rating / 33 * 100).toString() + '%'
+}
+
 module.exports = {
   fetchCookies,
   fetchRatings,
+  getColor,
+  getWidth
 };

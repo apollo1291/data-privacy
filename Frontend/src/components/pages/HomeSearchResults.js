@@ -63,7 +63,7 @@ export const HomeSearchResults = (props) => {
                 {matches.map(site => (
                     <div className='sitebox' key={site.url} onClick={() => displayCookiePage(site.url)}>
                         <p className='holdsUrl'>{site.url}</p>
-                        <p className='holdsRating'>{site.rating}</p>
+                        <p className='holdsRating'>{site.rating} / 100</p>
                     </div>
                 ))}
             </div>

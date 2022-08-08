@@ -113,7 +113,7 @@ export function LoginPage(props){
         
         <div className='page'>
         <div id='form'>
-        <h1><img src={require("../../databaseWhite.png") } alt=''></img>Datalink</h1>
+        <h1><img src={require("../../assets/databaseIconWhite.png") } alt=''></img>Datalink</h1>
         <div className='label'>
             <label>Username:</label>
             </div>
@@ -147,7 +147,7 @@ export function LoginPage(props){
             <>
         <div className='page'>
         <div id='form'>
-            <h1><img src={require("../../databaseWhite.png") } alt=''></img>Datalink</h1>
+            <h1><img src={require("../../assets/databaseIconWhite.png") } alt=''></img>Datalink</h1>
             <div className='label'>
                 <label>Set Email:</label>
             </div>

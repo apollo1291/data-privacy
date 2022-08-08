@@ -5,7 +5,6 @@ const fetchCookies = async (url) => {
      * @param: url -> the url the user selected
      * @return: ratings -> an array of object containing the cookies associated with the url 
      */
-  console.log("runs");
   const cookieResponse = await fetch("http://localhost:3080/api/cookies", {
     method: "POST",
     headers: { "Content-Type": "application/json" },

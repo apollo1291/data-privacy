@@ -20,11 +20,34 @@ export const Home = (props) => {
 
     return (
         <>
+            
             <div id="frontpage" className="center-active">
-                <input type="text" placeholder="Enter Url" id="inp" onChange={event => handleChange(event)}></input><br></br>
-                <button type="button" id="btn"> Search </button>
+                <input type="text" placeholder="Test a website for cookies" id="inp" onChange={event => handleChange(event)}></input><br></br>
+                
             </div>
             <HomeSearchResults userSearch={state.userSearch} appState={props.appState} setAppState={props.setAppState} />
+
+            <div className='info-container'>
+            <div className='info'>
+                <div className='header'>
+                    <h1>
+                        What are Cookies?
+                    </h1>
+                </div>
+                <div className='info-text'>
+                    <p>
+                    A Cookie is a small data file created by a web server 
+                    and stored on a users device. They are used to track information 
+                    like preferences, logins, and browsing history. Cookies are essential
+                    for a quality user experience on the web and allow for features like 
+                    backtracking, automatic logins, and dark-mode. Cookies are not inherently
+                    bad. However, when used excessively or incorrectly they introduce vulnerabilities
+                    that can expose user data, or even take users data without permission.
+                    </p>
+                </div>
+            </div>
+            </div>
+
         </>
 
 

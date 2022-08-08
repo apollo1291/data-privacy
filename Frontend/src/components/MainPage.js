@@ -1,4 +1,5 @@
 import { CookieReport } from "./pages/CookieReport"
+import { TopNav } from './TopNav';
 import { About } from "./pages/About"
 import { Home } from "./pages/Home"
 
@@ -12,7 +13,7 @@ export function MainPage(props){
     const Pages ={
       'Home': <Home appState = { props.appstate } setAppState = { props.setAppState } />,
       'About': <About />,
-      'cookieReport': <CookieReport url = { props.appState.url }/>
+      'cookieReport': <CookieReport url = { props.appState.url } setAppState = { props.setAppState }/>
     }
   
     const renderState = () => {
@@ -25,7 +26,11 @@ export function MainPage(props){
        * 
        * **/
       if (!props.appState.url){
-        return Pages[props.appState.Page]
+
+        return <>
+        <TopNav appState = { props.appstate} changePage = {props.setAppState}/>
+        {Pages[props.appState.Page]}
+        </>
       }
 
       return Pages['cookieReport']

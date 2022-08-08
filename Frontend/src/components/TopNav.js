@@ -16,7 +16,7 @@ export function TopNav(props) {
       <div className='topnav'>
 
         <div className='nav'>
-          <p id="name"><img src={require("../databaseWhite.png") } alt=''></img>Data-Link</p>
+          <p id="name"><img src={require("../assets/databaseIconWhite.png") } alt=''></img>Data-Link</p>
           <ul>
             <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} />
             <MenuOption name={"About"} appState = { props.appState } changePage={props.changePage} />
@@ -45,7 +45,7 @@ function MenuOption(props) {
      * @param: { none }
      * @return: { none }
     */
-    props.changePage({...props.appState, Page: props.name });
+    props.changePage({...props.appState, Page: props.name, url: null });
 
   };
 

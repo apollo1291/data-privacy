@@ -1,7 +1,6 @@
 
 import { useState } from 'react';
 import { MainPage } from './components/MainPage';
-import { TopNav } from './components/TopNav';
 import { LoginPage } from './components/pages/Login'
 
 
@@ -18,7 +17,7 @@ function App(){
     if (user.user){
       return (
       <div className="App">
-      <TopNav appState = { state } changePage = { setState }/>
+      
       <MainPage appState = { state } setAppState = { setState }/>
       </div>
         

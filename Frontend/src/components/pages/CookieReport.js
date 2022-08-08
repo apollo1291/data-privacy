@@ -3,23 +3,40 @@ import {fetchCookies, fetchRatings, getColor, getWidth} from '../../services/Fro
 import './cookieReport.css'
 
 export const CookieReport = (props) => {
+    const [isLoading, setLoading] = useState(true)
     const [cookieData, setCookies] = useState({});
     const [cookieRatings, setRatings] = useState({});
     useEffect(() => {
         const getData = async () =>{
         setCookies({cookies: await fetchCookies(props.url)});
         setRatings({ratings: await fetchRatings(props.url)})
+        setLoading(false)
     }
 
     getData()
         
     }, [props.url]);
 
+    const goBack = () => {
+        props.setAppState({...props.appState, Page: "Home", url: null})
+    }
     const showCookies = () => {
+        if (isLoading){
+            return(
+                <div></div>
+            )
+        }
         
         return (
 
             <>
+                    
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+                    <div id='back-button'>
+                    <span class='dot' onClick={() => goBack()}>
+                        <i class="fa fa-angle-left" style={{'fontSize': '24px'}}></i>
+                    </span>
+                    </div>                    
                     <div class='url'>
                         <h1>{props.url}</h1>
                     </div>

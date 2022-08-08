@@ -17,11 +17,10 @@ const findWebsites = (req, res) => {
      * @return: returns an object containing all of the matches and there rating
      */
     const userSearch = req.body.search;
-    pool.query('SELECT url, rating FROM websites where url LIKE $1', ['%' + userSearch + '%'], (err, result) => {
+    pool.query('SELECT url, rating FROM websites where url LIKE $1 OR url Like $2', ['https://www.%' + userSearch + '%', '%' + userSearch + '%'], (err, result) => {
         if (err){
             throw err
         }
-        
         res.status(200).json(result.rows)
     })
 }

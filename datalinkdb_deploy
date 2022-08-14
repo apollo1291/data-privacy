@@ -1,0 +1,1543 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 14.4
+-- Dumped by pg_dump version 14.4
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET xmloption = content;
+SET client_min_messages = warning;
+SET row_security = off;
+
+SET default_tablespace = '';
+
+SET default_table_access_method = heap;
+
+--
+-- Name: cookies; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.cookies (
+    id integer NOT NULL,
+    name character varying(40),
+    secure boolean,
+    expires character varying(20),
+    httponly boolean,
+    website_id integer
+);
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    username character varying(30),
+    email character varying(30),
+    password character varying(30)
+);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.users_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: websites; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.websites (
+    id integer NOT NULL,
+    url character varying(100),
+    rating integer,
+    cookie_number_rating integer,
+    cookie_security_rating integer,
+    cookie_expires_rating integer
+);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: cookies; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.cookies (id, name, secure, expires, httponly, website_id) FROM stdin;
+1	OGPC	f	2022-08-26 21:37:00	f	1
+2	NID	t	2023-01-26 20:36:59	t	1
+3	AEC	t	2023-01-23 20:36:59	t	1
+4	UULE	t	2022-07-28 03:37:00	f	1
+5	1P_JAR	t	2022-08-26 21:37:00	f	1
+6	PREF	t	2024-07-26 21:37:02	f	2
+7	VISITOR_INFO1_LIVE	t	2023-01-23 20:37:00	t	2
+8	CONSISTENCY	t	2022-07-27 21:47:03	f	2
+9	YSC	t	never	t	2
+10	GPS	t	2022-07-27 22:07:00	t	2
+11	_js_datr	t	2024-07-26 21:37:04	f	3
+12	sb	t	2024-07-26 21:37:04	t	3
+13	fr	t	2022-10-25 21:37:03	t	3
+14	csm-hit	f	2023-07-12 21:37:06	f	4
+15	ubid-main	t	2023-07-27 21:37:06	f	4
+16	skin	f	never	f	4
+17	session-id-time	t	2023-07-27 21:37:05	f	4
+18	i18n-prefs	f	2023-07-27 21:37:05	f	4
+19	session-token	t	2023-07-27 21:37:13	f	4
+20	session-id	t	2023-07-27 21:37:05	f	4
+21	s_vi	t	2022-07-27 22:07:15	f	5
+22	mk_epub	t	never	f	5
+23	s_cc	t	never	f	5
+24	s_fid	t	2022-07-27 22:07:14	f	5
+25	mbox	f	2022-07-27 22:08:15	f	5
+26	dssf	t	2023-07-27 21:37:14	t	5
+27	as_pcts	t	never	t	5
+28	dssid2	t	2023-07-27 21:37:14	t	5
+29	as_dc	t	2022-07-27 23:37:14	f	5
+30	at_check	f	never	f	5
+31	geo	f	never	f	5
+32	session_tracker	f	never	f	6
+33	edgebucket	t	2024-07-26 21:37:15	f	6
+34	csv	t	2024-07-26 21:37:16	f	6
+35	token_v2	t	2024-07-27 21:37:16	t	6
+36	loid	t	2024-07-27 21:37:16	f	6
+37	WMF-Last-Access-Global	t	2022-08-29 12:01:46	t	7
+38	GeoIP	t	never	f	7
+39	WMF-Last-Access	t	2022-08-29 12:01:46	t	7
+40	yhcstamp	f	2022-08-03 21:37:25	f	8
+41	ucs	f	2023-07-27 21:37:26	f	8
+42	cmp	t	2023-07-27 21:37:25	f	8
+43	A1S	t	never	f	8
+44	A3	t	2023-07-28 03:37:26	t	8
+45	A1	t	2023-07-28 03:37:24	t	8
+46	gt	t	2022-07-28 00:37:28	f	9
+47	guest_id	t	2024-07-26 21:37:27	f	9
+48	personalization_id	t	2024-07-26 21:37:27	f	9
+49	ct0	t	2022-07-28 03:37:28	f	9
+50	guest_id_ads	t	2024-07-26 21:37:27	f	9
+51	guest_id_marketing	t	2024-07-26 21:37:27	f	9
+52	_SS	t	never	f	10
+53	SRCHUSR	t	2024-07-27 21:37:28	f	10
+54	SRCHUID	t	2024-07-27 21:37:28	f	10
+55	SUID	t	2022-07-28 21:37:28	t	10
+56	_EDGE_S	f	never	t	10
+57	_HPVN	t	2024-07-27 21:37:28	f	10
+58	MUIDB	f	2023-08-21 21:37:28	t	10
+59	SRCHHPGUSR	t	2024-07-27 21:37:28	f	10
+60	_EDGE_V	f	2023-08-21 21:37:28	t	10
+61	SRCHD	t	2024-07-27 21:37:28	f	10
+62	MUID	t	2023-08-21 21:37:28	f	10
+63	ig_did	t	2024-07-26 21:37:29	t	11
+64	mid	t	2024-07-26 21:37:29	f	11
+65	ig_nrcb	t	2023-07-27 21:37:29	f	11
+66	csrftoken	t	2023-07-26 21:37:30	f	11
+67	tsrce	t	2022-07-30 21:37:30	t	12
+68	x-pp-s	t	never	t	12
+69	ts	t	2025-07-26 21:37:30	t	12
+70	l7_az	t	2022-07-27 22:07:30	t	12
+71	ts_c	t	2025-07-26 21:37:30	f	12
+72	nsid	t	never	t	12
+73	enforce_policy	t	2023-07-27 21:37:31	f	12
+74	cookie_check	t	2032-07-27 21:37:30	t	12
+75	LANG	t	2022-07-28 06:23:27	t	12
+76	_au_last_seen_iab_tcf	f	2023-07-27 21:37:36	f	13
+77	__gpi	f	2023-08-21 21:36:42	f	13
+78	sailthru_visitor	f	2023-07-27 21:37:35	f	13
+79	__gads	f	2023-08-21 21:36:42	f	13
+80	_au_last_seen_goo	f	2023-07-27 21:37:35	f	13
+81	_au_last_seen_openx	f	2023-07-27 21:37:35	f	13
+82	_au_last_seen_ado	f	2023-07-27 21:37:35	f	13
+83	_au_last_seen_adx	f	2023-07-27 21:37:35	f	13
+84	_au_last_seen_pub	f	2023-07-27 21:37:35	f	13
+85	_parsely_session	f	2022-07-27 22:07:35	f	13
+86	nol_fpid	f	2023-01-23 20:37:35	f	13
+87	_gat_auPassiveTagger	f	2022-07-27 21:38:36	f	13
+88	_au_last_seen_mediamath	f	2023-07-27 21:37:35	f	13
+89	sailthru_pageviews	f	2022-07-27 22:07:35	f	13
+90	_au_1d	f	2023-07-27 21:37:35	f	13
+91	fandom_global_id	t	2032-07-27 07:49:35	t	13
+92	wikia_session_id	f	2022-07-27 22:07:35	f	13
+93	tracking_session_id	f	2022-07-27 22:07:35	f	13
+94	_au_last_seen_apn	f	2023-07-27 21:37:35	f	13
+95	pv_number_global	f	2022-07-27 22:07:35	f	13
+96	_gat_wikiUnsampledProd	f	2022-07-27 21:38:35	f	13
+97	Geo	t	never	f	13
+98	_gat_wikiSampledProd	f	2022-07-27 21:38:35	f	13
+99	_gat_fandomProd	f	2022-07-27 21:38:35	f	13
+100	_parsely_visitor	f	2023-08-27 07:37:35	f	13
+101	_ga	f	2024-07-26 21:37:36	f	13
+102	pv_number	f	2022-07-27 22:07:35	f	13
+103	_ga_LVKNCJXRLW	f	2024-07-26 21:37:34	f	13
+104	_gid	f	2022-07-28 21:37:36	f	13
+105	_fbp	f	2022-10-25 21:37:36	f	13
+106	_au_last_seen_ttd	f	2023-07-27 21:37:35	f	13
+107	sailthru_content	f	2023-07-27 21:37:35	f	13
+108	_au_last_seen_unruly	f	2023-07-27 21:37:35	f	13
+109	_b2	f	2024-07-26 21:37:35	f	13
+110	wikia_beacon_id	f	2023-01-26 21:37:35	f	13
+111	bm_sv	t	2022-07-27 23:37:39	f	14
+112	locGuestData	t	2023-07-27 21:37:39	t	14
+113	locDataV3	t	2022-07-27 22:37:39	t	14
+114	xpm	f	2022-07-27 22:07:39	f	14
+115	adblocked	f	2022-08-03 21:37:38	f	14
+116	pxcts	f	never	f	14
+117	_astc	f	never	f	14
+118	TBV	f	2022-08-26 21:37:38	f	14
+119	akavpau_p2	t	never	t	14
+120	dimensionData	f	2023-07-27 21:37:38	f	14
+121	_pxhd	f	2023-07-27 21:37:36	f	14
+122	exp-ck	f	2022-07-27 22:07:39	f	14
+123	hasACID	t	2023-07-27 21:37:37	f	14
+124	mobileweb	f	2022-07-27 22:07:39	f	14
+125	_pxvid	f	2023-07-27 21:37:38	f	14
+126	bstc	f	2022-07-27 22:07:39	f	14
+127	ak_bmsc	f	2022-07-27 23:37:37	t	14
+128	tb_sw_supported	f	2022-08-10 16:37:39	f	14
+129	_pxff_cfp	f	2022-07-27 21:38:38	f	14
+130	xpa	f	2022-07-27 22:07:39	f	14
+131	vtc	f	2032-07-27 09:37:39	f	14
+132	TB_SFOU-100	f	2022-07-28 21:37:39	f	14
+133	TB_Navigation_Preload_01	f	2022-07-28 21:37:37	f	14
+134	xptwg	f	never	f	14
+135	TB_Latency_Tracker_100	f	2022-07-28 21:37:37	f	14
+136	TS013ed49a	f	never	f	14
+137	assortmentStoreId	t	2022-07-27 22:37:39	f	14
+138	AID	f	2032-07-24 21:37:36	t	14
+139	TS01b0be75	f	never	f	14
+140	hasLocData	t	2022-07-27 22:37:39	f	14
+141	com.wm.reflector	f	2022-10-25 21:37:39	f	14
+142	ACID	t	2023-07-27 21:37:37	t	14
+143	auth	t	2022-07-27 22:07:37	t	14
+144	lidc	t	2022-07-28 21:37:40	f	15
+145	bcookie	t	2023-07-27 21:37:40	f	15
+146	bscookie	t	2023-07-27 21:37:40	t	15
+147	lang	t	never	f	15
+148	JSESSIONID	t	never	f	15
+149	ci	t	never	f	16
+150	__adblocker	f	2022-07-29 21:37:41	f	16
+151	speedpin	t	2022-07-27 22:07:40	f	16
+152	_cb	t	2023-08-26 21:37:48	f	17
+153	_gat_UA-58630905-2	f	2022-07-27 21:38:48	f	17
+154	walley_gid	f	2022-07-28 21:37:48	f	17
+155	_chartbeat2	t	2023-08-26 21:37:48	f	17
+156	_gcl_au	f	2022-10-25 21:37:47	f	17
+157	b2b_cig_opt	f	2022-07-28 19:00:52	f	17
+158	edu_cig_opt	f	2022-07-28 19:00:52	f	17
+159	nyt-m	f	2027-07-27 21:37:47	f	17
+160	nyt-b3-traceid	t	never	f	17
+161	__gpi	f	2023-08-21 21:36:50	f	17
+162	_cb_svref	t	2022-07-27 22:07:48	f	17
+163	nyt-jkidd	f	2023-07-27 21:37:47	f	17
+164	__gads	f	2023-08-21 21:36:50	f	17
+165	datadome	t	2023-07-27 21:37:47	f	17
+166	nyt-geo	f	2022-07-28 03:37:42	f	17
+167	nyt-purr	t	2023-07-27 21:37:42	f	17
+168	nyt-gdpr	f	2022-07-28 03:37:48	f	17
+169	walley	f	2024-07-26 21:37:48	f	17
+170	purr-cache	t	2023-08-27 09:17:47	t	17
+171	nyt-a	t	2023-07-27 21:37:48	f	17
+172	dp1	t	2024-07-26 21:37:49	f	18
+173	__uzmaj2	f	2023-01-23 21:37:49	f	18
+174	__ssuzjsr2	f	2023-01-23 21:37:49	f	18
+175	__uzmcj2	f	2023-01-23 21:37:49	f	18
+176	__uzma	f	2023-01-23 20:37:47	f	18
+177	ak_bmsc	f	2022-07-27 23:37:47	t	18
+178	__uzme	f	2023-01-23 20:37:47	f	18
+179	__uzmf	f	2023-01-23 20:37:47	f	18
+180	__uzmdj2	f	2023-01-23 21:37:49	f	18
+181	__uzmb	f	2023-01-23 20:37:47	f	18
+182	__uzmbj2	f	2023-01-23 21:37:49	f	18
+183	__uzmd	f	2023-01-23 20:37:47	f	18
+184	__uzmc	f	2023-01-23 20:37:47	f	18
+185	__deba	f	2023-01-23 20:37:47	f	18
+186	ebay	t	never	f	18
+187	nonsession	t	2024-07-26 21:37:49	t	18
+188	__ssds	f	2023-01-23 21:37:49	f	18
+189	s	t	never	t	18
+190	api_token	t	2023-08-27 21:37:51	f	19
+191	twitch.lohp.countryCode	f	2023-08-21 21:37:49	f	19
+192	server_session_id	t	never	f	19
+193	experiment_overrides	t	2023-08-27 21:37:50	f	19
+194	unique_id_durable	t	2023-08-27 21:37:49	t	19
+195	unique_id	t	2023-08-27 21:37:49	f	19
+196	_gat	f	2022-07-27 21:38:52	f	20
+197	_gid	f	2022-07-28 21:37:52	f	20
+198	_ga	f	2024-07-26 21:37:52	f	20
+199	ac	f	never	f	20
+200	indeed_rcc	f	2027-07-26 21:37:52	f	20
+201	CTK	f	2027-07-26 21:37:52	f	20
+202	__cf_bm	t	2022-07-27 22:07:51	t	20
+203	_cfuvid	t	never	t	20
+204	INDEED_CSRF_TOKEN	f	never	f	20
+205	UD	f	2027-07-26 21:37:52	f	20
+206	LV	f	2027-07-26 21:37:52	f	20
+207	CSRF	f	never	f	20
+208	CTK	t	2027-07-26 21:37:51	f	20
+209	m-dynamicFontSize	f	2023-07-27 21:37:53	f	21
+210	__cf_bm	t	2022-07-27 22:07:53	t	21
+211	m-s	t	2024-07-26 21:37:54	t	21
+212	m-b_strict	t	2024-07-26 21:37:54	t	21
+213	m-b_lax	t	2024-07-26 21:37:54	t	21
+214	m-uid	f	2024-07-27 09:37:53	f	21
+215	m-b	t	2024-07-26 21:37:54	t	21
+216	ubid-main	f	2036-01-01 02:00:53	f	22
+217	csm-hit	f	2023-07-12 21:37:55	f	22
+218	session-id-time	f	2036-01-01 02:00:53	f	22
+219	session-id	f	2036-01-01 02:00:53	f	22
+220	_sctr	f	2023-08-27 13:56:18	f	23
+221	_pin_unauth	f	2023-07-27 21:38:00	f	23
+222	_scid	f	2023-08-27 13:56:17	f	23
+223	_fbp	f	2022-10-25 21:38:00	f	23
+224	_uetvid	f	2023-08-21 21:37:59	f	23
+225	tmab_usps	f	2022-07-28 21:37:59	f	23
+226	_uetsid	f	2022-07-28 21:37:59	f	23
+227	_gat_GSA_ENOR0	f	2022-07-27 21:38:59	f	23
+228	_rdt_uuid	t	2022-10-25 21:37:59	f	23
+229	_gcl_au	f	2022-10-25 21:37:59	f	23
+230	_ga_3NXP3C8S9V	f	2024-07-26 21:37:59	f	23
+231	_ga	f	2024-07-26 21:37:59	f	23
+232	_session_UA-80133954-3	f	2022-07-27 22:07:59	f	23
+233	_dc_gtm_UA-80133954-3	f	2022-07-27 21:38:59	f	23
+234	mab_usps	f	2022-07-28 21:37:59	f	23
+235	_gid	f	2022-07-28 21:37:59	f	23
+236	psmPageLoadId	f	2023-07-27 21:38:03	f	24
+237	psmSessionStart	f	2023-07-27 21:38:03	f	24
+238	psmLastActiveTimestamp	f	2023-07-27 21:38:03	f	24
+239	psmSessionId	f	2023-07-27 21:38:03	f	24
+240	_bti	f	2023-07-27 21:38:03	f	24
+241	hkgc	t	2023-07-27 21:38:02	f	24
+242	WMUKID_STABLE	f	2023-07-27 21:38:03	f	24
+243	stateCode	t	never	f	24
+244	_bts	f	2022-07-27 22:38:02	f	24
+245	OptanonConsent	t	2025-07-26 21:38:02	f	24
+246	btIdentify	f	2023-07-27 21:38:02	f	24
+247	AMCVS_7FF852E2556756057F000101%40AdobeOr	f	never	f	24
+248	s_cc	f	never	f	24
+249	s_ecid	t	2024-07-26 21:38:03	f	24
+250	geoData	t	never	f	24
+251	_t_tests	t	2022-07-27 22:38:02	f	24
+252	seenBreakingNews	f	never	f	24
+253	umto	t	2022-07-28 23:38:02	f	24
+254	AMCV_7FF852E2556756057F000101%40AdobeOrg	f	2024-07-27 21:38:03	f	24
+255	umto	f	never	f	24
+256	CDPID	t	2023-07-27 21:38:03	f	24
+257	optimizelyEndUserId	f	2023-01-23 20:38:01	f	24
+258	countryCode	t	never	f	24
+259	bounceClientVisit340v	f	2022-07-27 22:08:03	f	24
+260	usprivacy	t	never	f	24
+261	FastAB	f	2023-06-30 19:00:52	f	24
+262	outbrain_cid_fetch	f	2022-07-27 21:43:02	f	24
+263	cnprevpage_pn	f	2022-07-27 22:08:02	f	24
+264	_pbjs_userid_consent_data	f	2022-08-26 21:38:02	f	24
+1262	_tt_enable_cookie	f	2023-08-21 23:36:36	f	87
+1263	_ga	f	2024-07-26 23:36:36	f	87
+265	s_cc	f	never	f	25
+266	s_ecid	t	2024-07-26 21:44:09	f	25
+267	_pbjs_userid_consent_data	f	2022-08-26 21:44:09	f	25
+268	psmPageLoadId	f	2023-07-27 21:44:09	f	25
+269	_bti	f	2023-07-27 21:44:09	f	25
+270	hkgc	t	2023-07-27 21:44:09	f	25
+271	WMUKID_STABLE	f	2023-07-27 21:44:09	f	25
+272	OptanonConsent	t	2025-07-26 21:44:09	f	25
+273	stateCode	t	never	f	25
+274	_bts	f	2022-07-27 22:44:09	f	25
+275	AMCVS_7FF852E2556756057F000101%40AdobeOr	f	never	f	25
+276	btIdentify	f	2023-07-27 21:44:09	f	25
+277	seenBreakingNews	f	never	f	25
+278	_t_tests	t	2022-07-27 22:44:09	f	25
+279	geoData	t	never	f	25
+280	umto	t	2022-07-28 23:44:08	f	25
+281	AMCV_7FF852E2556756057F000101%40AdobeOrg	f	2024-07-27 21:44:09	f	25
+282	umto	f	never	f	25
+283	psmLastActiveTimestamp	f	2023-07-27 21:44:09	f	25
+284	CDPID	t	2023-07-27 21:44:09	f	25
+285	countryCode	t	never	f	25
+286	optimizelyEndUserId	f	2023-01-23 20:44:08	f	25
+287	psmSessionStart	f	2023-07-27 21:44:09	f	25
+288	bounceClientVisit340v	f	2022-07-27 22:14:09	f	25
+289	usprivacy	t	never	f	25
+290	FastAB	f	2023-06-30 19:00:53	f	25
+291	psmSessionId	f	2023-07-27 21:44:09	f	25
+292	outbrain_cid_fetch	f	2022-07-27 21:49:09	f	25
+293	cnprevpage_pn	f	2022-07-27 22:14:08	f	25
+1264	_fbp	f	2022-10-25 23:36:36	f	87
+294	__tea_cache_tokens_1988	f	2022-08-03 21:53:17	f	26
+295	bm_sz	f	2022-07-28 01:53:14	f	26
+296	_abck	t	2023-07-27 21:53:15	f	26
+297	msToken	t	2022-08-06 21:53:14	f	26
+298	tt_csrf_token	t	never	t	26
+299	ttwid	f	2023-07-27 21:53:14	t	26
+300	__pdst	f	2023-07-27 21:53:19	f	27
+301	_pin_unauth	f	2023-07-27 21:53:19	f	27
+302	_uetvid	f	2023-08-21 21:53:19	f	27
+303	_uetsid	f	2022-07-28 21:53:19	f	27
+304	_ga	f	2023-08-27 14:11:39	f	27
+305	_ga_KR3J610VYM	f	2023-08-27 14:11:39	f	27
+306	user_prefs	f	2023-07-27 21:53:18	f	27
+307	_gid	f	2022-07-28 21:53:18	f	27
+308	last_browse_page	f	never	f	27
+309	exp_hangover	t	2023-01-23 20:53:18	t	27
+310	_gcl_au	f	2022-10-25 21:53:18	f	27
+311	_dc_gtm_UA-2409779-1	f	2022-07-27 21:54:18	f	27
+312	ua	f	2023-07-27 21:53:18	f	27
+313	fve	t	2023-08-27 14:11:38	f	27
+314	uaid	t	2023-07-27 21:53:18	f	27
+315	__hstc	f	2023-01-23 20:53:22	f	28
+316	_fbp	f	2022-10-25 21:53:22	f	28
+317	__hssc	f	2022-07-27 22:23:22	f	28
+318	_gcl_au	f	2022-10-25 21:53:21	f	28
+319	__hssrc	f	never	f	28
+320	_gat	f	2022-07-27 21:54:21	f	28
+321	hubspotutk	f	2023-01-23 20:53:22	f	28
+322	_session_id	t	2022-08-03 21:53:20	t	28
+323	_ga	f	2024-07-26 21:53:21	f	28
+324	_gid	f	2022-07-28 21:53:21	f	28
+325	MicrosoftApplicationsTelemetryFirstLaunc	f	2023-07-27 21:53:24	f	30
+326	MicrosoftApplicationsTelemetryDeviceId	f	2023-07-27 21:53:24	f	30
+327	OH.SID	t	never	t	30
+328	MUID	t	2023-08-21 21:53:23	f	30
+329	MSFPC	t	2023-07-27 21:52:31	f	30
+330	OH.FLID	t	2023-07-27 21:53:23	t	30
+331	OH.DCAffinity	t	2022-07-28 05:53:23	t	30
+332	MSCC	t	2022-07-28 21:53:28	f	31
+333	fptctx2	t	never	t	31
+334	MUID	t	2023-08-21 21:53:27	f	31
+335	cartMuid	t	2023-07-27 21:53:26	f	31
+336	MS0	t	2022-07-27 22:23:25	f	31
+337	ai_session	t	2022-07-27 22:23:27	f	31
+338	MicrosoftApplicationsTelemetryDeviceId	t	2023-07-27 21:53:27	f	31
+339	akacd_OneRF	t	2022-10-25 21:53:26	f	31
+340	AEMDC	t	never	f	31
+341	MC1	t	2023-07-27 21:53:25	f	31
+342	OWAPF	f	never	f	32
+343	MSFPC	t	2023-07-27 21:52:37	f	32
+344	logonLatency	t	never	t	32
+345	ClientId	t	2023-07-27 21:53:30	f	32
+346	_uetvid	f	2023-08-21 21:53:31	f	33
+347	_uetsid	f	2022-07-28 21:53:31	f	33
+348	_gcl_au	f	2022-10-25 21:53:31	f	33
+349	_pxvid	f	2023-07-27 21:53:31	f	33
+350	_pxff_bsco	f	2022-07-27 21:54:31	f	33
+351	DoubleClickSession	t	never	f	33
+352	zjs_anonymous_id	f	2023-07-28 03:42:42	f	33
+353	KruxPixel	t	2022-07-30 21:53:31	f	33
+354	zg_anonymous_id	f	2023-07-28 03:42:42	f	33
+355	zgsession	f	never	t	33
+356	_gid	f	2022-07-28 21:53:30	f	33
+357	pxcts	f	never	f	33
+358	_ga	f	2024-07-26 21:53:30	f	33
+359	_gat	f	2022-07-27 21:54:31	f	33
+360	zjs_user_id	f	2023-07-28 03:42:42	f	33
+361	zguid	f	2032-07-27 09:53:30	f	33
+362	nol_fpid	f	2023-01-23 20:53:36	f	34
+363	s_cc	f	never	f	34
+364	s_gpv_pn	f	2022-07-27 22:23:35	f	34
+365	s_omni_lid	f	never	f	34
+366	check	f	never	f	34
+367	s_c24	f	2025-07-26 21:53:35	f	34
+368	client_version	t	never	f	34
+369	SWID	f	2042-07-27 21:53:32	f	34
+370	country	f	never	f	34
+371	tveMVPDAuth	f	never	f	34
+372	usprivacy	f	2023-07-27 21:53:34	f	34
+373	mbox	f	2022-07-27 22:24:35	f	34
+374	_nr	f	never	f	34
+375	AMCV_EE0201AC512D2BE80A490D4C%40AdobeOrg	f	2024-07-27 21:53:34	f	34
+376	userZip	f	never	f	34
+377	connectionspeed	f	2022-08-03 21:53:33	f	34
+378	s_ecid	f	2024-07-26 21:53:35	f	34
+379	_fbp	f	2022-10-25 21:53:35	f	34
+380	edition-view	f	2022-08-03 21:53:33	f	34
+381	edition	f	2022-08-03 21:53:33	f	34
+382	AMCVS_EE0201AC512D2BE80A490D4C%40AdobeOr	f	never	f	34
+383	hashedIp	f	never	f	34
+384	s_ensRegion	f	never	f	34
+385	country	f	2022-07-28 21:53:35	f	34
+386	OptanonConsent	f	2023-07-27 21:53:36	f	34
+387	s_ensCDS	f	never	f	34
+388	_omnicwtest	f	never	f	34
+389	cookieMonster	f	2022-08-26 21:53:33	f	34
+390	tveAuth	f	never	f	34
+391	region	f	2022-08-03 21:53:33	f	34
+392	client_type	t	never	f	34
+393	s_c24_s	f	2022-07-27 22:23:35	f	34
+394	_dcf	f	never	f	34
+395	panoramaId	f	never	f	35
+396	panoramaId_expiry	f	never	f	35
+397	pbjs_li_nonid	f	2022-07-28 21:53:40	f	35
+398	cto_bidid	f	2023-08-21 16:53:37	f	35
+399	cto_bundle	f	2023-08-21 16:53:37	f	35
+400	_lr_retry_request	f	2022-07-27 22:53:39	f	35
+401	_lr_env_src_ats	f	2022-08-26 21:53:39	f	35
+402	_tfpvi	f	2023-07-27 21:53:38	f	35
+403	_uc_referrer	f	2023-07-27 21:53:37	f	35
+404	__aaxsc	f	never	f	35
+405	hb_insticator_uid	f	never	f	35
+406	aasd	t	never	f	35
+407	_ga	f	2024-07-26 21:53:37	f	35
+408	pageviewCount	f	never	f	35
+409	_gat_UA-3326248-22	f	2022-07-27 21:54:37	f	35
+410	__gpi	f	2023-08-21 21:52:45	f	35
+411	prism_25900740	f	2022-08-26 21:53:38	f	35
+412	__gads	f	2023-08-21 21:52:45	f	35
+413	_ga_89QM5FDPEJ	f	2024-07-26 21:53:37	f	35
+414	_gid	f	2022-07-28 21:53:37	f	35
+415	_chartbeat2	t	2023-08-26 21:53:37	f	35
+416	_fbp	f	2022-10-25 21:53:37	f	35
+417	_pbjs_userid_consent_data	f	2022-08-26 21:53:37	f	35
+418	_gat_UA-4780630-1	f	2022-07-27 21:54:37	f	35
+419	_cc_id	f	2023-04-23 21:53:40	f	35
+420	returningVisitor	t	2022-08-06 21:53:37	f	35
+421	_gcl_au	f	2022-10-25 21:53:37	f	35
+422	_cb_svref	t	2022-07-27 22:23:37	f	35
+423	_cb	t	2023-08-26 21:53:37	f	35
+424	_gcl_au	f	2022-10-25 21:53:42	f	37
+425	ins_visitor	f	never	f	37
+426	location_is_verified	f	2022-07-28 21:53:41	f	37
+427	forterToken	f	2027-07-26 21:53:45	f	38
+428	_px_f394gi7Fvmc43dfg_user_id	f	2024-07-26 21:53:45	f	38
+429	ak_bmsc	f	2022-07-27 23:53:42	t	38
+430	IN_STORE_USER_NUMBER	f	2022-07-27 21:58:44	f	38
+431	thda.u	f	2024-07-27 21:53:44	f	38
+432	THD_LOCALIZER	f	never	f	38
+433	at_check	f	never	f	38
+434	IN_STORE_API_SESSION	f	2022-07-27 21:58:43	f	38
+435	_px	f	2022-07-29 21:53:44	f	38
+436	_abck	t	2023-07-27 21:53:44	f	38
+437	DELIVERY_ZIP	f	2023-07-27 21:53:44	f	38
+438	DELIVERY_ZIP_TYPE	f	2023-07-27 21:53:44	f	38
+439	_pxvid	f	2023-07-27 21:53:43	f	38
+440	mbox	f	2022-07-27 22:24:44	f	38
+441	THD_CACHE_NAV_PERSIST	f	2024-03-18 21:53:43	f	38
+442	bm_sz	f	2022-07-28 01:53:42	f	38
+443	HD_DC	t	never	f	38
+444	THD_CACHE_NAV_SESSION	f	2022-07-28 21:53:43	f	38
+445	AMCVS_F6421253512D2C100A490D45%40AdobeOr	f	never	f	38
+446	AMCV_F6421253512D2C100A490D45%40AdobeOrg	f	2024-07-27 21:53:42	f	38
+447	THD_NR	f	2022-07-28 16:53:42	f	38
+448	AKA_A2	t	2022-07-27 22:53:42	t	38
+449	thda.s	f	never	f	38
+450	_pxde	f	2022-07-29 21:53:44	f	38
+451	akacd_usbeta	t	never	f	38
+452	THD_SESSION	f	2022-07-28 21:53:43	f	38
+453	THD_PERSIST	f	2024-03-18 21:53:43	f	38
+454	FCNEC	f	2023-07-27 21:53:49	f	39
+455	_ga	f	2024-07-26 21:53:49	f	39
+456	_ga_NW9WX3ZPEG	f	2024-07-26 21:53:49	f	39
+457	_gid	f	2022-07-28 21:53:49	f	39
+458	ajs_anonymous_id	f	2023-07-27 21:53:49	f	39
+459	_dc_gtm_UA-128752877-9	f	2022-07-27 21:54:49	f	39
+460	__gpi	f	2023-08-21 21:52:56	f	39
+461	s_pers	f	2025-07-26 21:53:48	f	39
+462	s_ecid	f	2024-07-26 21:53:48	f	39
+463	s_cc	f	never	f	39
+464	_clsk	f	2022-07-28 21:53:47	f	39
+465	_clck	f	2023-07-27 21:53:47	f	39
+466	AMCV_17FC406C5357BA6E0A490D4D%40AdobeOrg	f	2024-07-27 21:53:48	f	39
+467	s_sess	f	never	f	39
+468	_chartbeat2	t	2023-08-26 21:53:47	f	39
+469	AKA_A2	t	2022-07-27 22:53:48	t	39
+470	_cb	t	2023-08-26 21:53:47	f	39
+471	seerses	f	2022-07-27 22:23:47	f	39
+472	AMCVS_17FC406C5357BA6E0A490D4D%40AdobeOr	f	never	f	39
+473	cto_bundle	f	2023-08-27 07:53:46	f	39
+474	EID	f	2023-07-27 21:53:46	f	39
+475	__gads	f	2023-08-21 21:52:55	f	39
+476	_uetvid	f	2023-08-21 21:53:46	f	39
+477	_gcl_au	f	2022-10-25 21:53:46	f	39
+478	_uetsid	f	2022-07-28 21:53:46	f	39
+479	seerid	f	2032-07-24 21:53:47	f	39
+480	_lr_sampling_rate	f	2022-07-28 21:53:49	f	39
+481	FXN_flk	f	2022-07-28 21:53:45	f	39
+482	_cb_svref	t	2022-07-27 22:23:47	f	39
+483	_pbjs_userid_consent_data	f	2022-08-26 21:53:47	f	39
+484	usprivacy	f	2023-07-27 21:53:45	f	39
+485	ajs_anonymous_id	f	2023-07-27 21:53:51	f	40
+486	AWSELBCORS	t	2022-07-27 22:08:51	f	40
+487	websdk_swiper_flags	f	2022-07-27 22:13:51	f	40
+488	AWSELB	f	2022-07-27 22:08:51	f	40
+489	nmstat	f	2025-04-22 21:53:51	f	40
+490	_gcl_au	f	2022-10-25 21:53:51	f	40
+491	s_cc	f	never	f	40
+492	AMCVS_969430F0543F253D0A4C98C6%40AdobeOr	f	never	f	40
+493	gpv_pn	f	2022-07-27 22:23:51	f	40
+494	AKES_GEO	t	never	f	40
+495	_fbp	f	2022-10-25 21:53:51	f	40
+496	CONSENTMGR	f	2023-07-27 21:53:50	f	40
+497	s_fid	f	2024-07-27 21:53:51	f	40
+498	utag_main	f	2023-07-27 21:53:50	f	40
+499	ivid	t	2027-07-27 21:53:51	f	40
+500	pageProperties	f	never	f	40
+501	ivid_b	t	2027-07-27 21:53:51	f	40
+502	AMCV_969430F0543F253D0A4C98C6%40AdobeOrg	f	2024-07-27 21:53:51	f	40
+503	ccpa	f	2023-07-27 21:53:51	f	40
+504	AKA_A2	t	2022-07-27 22:53:50	t	40
+505	akid	f	never	f	40
+506	csrf	t	2025-04-22 21:53:53	t	41
+507	sess	t	2022-08-06 21:53:53	t	41
+508	hide-fb-button	t	2022-07-27 22:23:55	f	42
+509	_fbp	f	2022-10-25 21:53:55	f	42
+510	_gat_UA-1203987-1	f	2022-07-27 21:54:55	f	42
+511	_gid	f	2022-07-28 21:53:55	f	42
+512	_ga	f	2024-07-26 21:53:55	f	42
+513	qmeasure__persistence	t	never	t	42
+514	__cfruid	t	never	t	42
+515	akv	t	2022-07-28 21:53:53	t	42
+516	fs	t	2032-07-24 21:53:53	t	42
+517	app_session_id	t	2022-07-27 22:23:55	f	42
+518	__cf_bm	t	2022-07-27 22:23:53	t	42
+519	session_landing_page	t	never	f	42
+520	qi5	t	2032-07-24 21:53:53	t	42
+521	qtkn	t	never	f	42
+522	_scid	f	2023-08-27 14:12:13	f	42
+523	_cfuvid	t	never	t	42
+524	_gcl_au	f	2022-10-25 21:53:55	f	42
+525	dteRfWys	f	2023-07-28 03:43:09	f	43
+526	__gpi	f	2023-08-21 21:53:04	f	43
+527	ffsession	f	never	f	43
+528	UserLocation	t	2023-07-27 21:53:56	f	43
+529	GuestLocation	t	2022-07-28 21:53:55	f	43
+530	X-Experiment-Tracking	t	2022-07-27 21:54:55	f	43
+531	__gads	f	2023-08-21 21:53:04	f	43
+532	X-Experiment-Payload	t	2022-07-27 21:54:55	f	43
+533	sapphire	t	2022-08-27 08:23:01	f	43
+534	visitorId	t	2024-07-26 21:53:55	f	43
+535	TealeafAkaSid	f	2022-08-26 21:53:55	f	43
+536	extole_access_token	t	2023-07-27 21:54:00	f	44
+537	__adroll_fpc	f	2023-07-28 03:54:00	f	44
+538	_cs_c	f	2023-08-27 07:54:00	f	44
+539	_zm_mtk_guid	t	2024-07-26 21:53:57	f	44
+540	_fbp	f	2022-10-25 21:54:00	f	44
+541	_zm_tracking_guid	t	2024-07-26 21:54:00	f	44
+542	_uetvid	f	2023-08-21 21:54:00	f	44
+543	OptanonConsent	f	2023-07-27 21:54:00	f	44
+544	cred	t	never	t	44
+545	OnetrustActiveGroups	t	2023-07-27 21:54:00	f	44
+546	_gat_UA-29692388-1	f	2022-07-27 21:54:59	f	44
+547	_cs_id	f	2023-08-27 07:54:00	f	44
+548	_gcl_au	f	2022-10-25 21:53:59	f	44
+549	__ar_v4	f	2023-07-27 21:54:00	f	44
+550	_gid	f	2022-07-28 21:53:59	f	44
+551	_gat_UA-29692388-10	f	2022-07-27 21:54:59	f	44
+552	_zm_lang	t	2023-07-27 21:53:58	f	44
+553	_ga	f	2024-07-26 21:53:59	f	44
+554	_cs_s	f	2022-07-27 22:24:00	f	44
+555	_zm_cdn_blocked	t	2022-07-28 03:53:59	f	44
+556	_zm_page_auth	t	never	t	44
+557	_zm_currency	t	2022-07-28 21:53:57	f	44
+558	_zm_csp_script_nonce	t	never	t	44
+559	_uetsid	f	2022-07-28 21:54:00	f	44
+560	_pin_unauth	f	2023-07-27 21:54:00	f	44
+561	_zm_visitor_guid	t	2023-07-27 21:53:57	f	44
+562	_zm_ssid	t	never	t	44
+563	_ttp	f	2023-08-21 21:54:03	f	45
+564	_tt_enable_cookie	f	2023-08-21 21:54:03	f	45
+565	_tq_id.TV-81453654-1.edd5	f	2024-07-26 21:54:03	f	45
+566	_scid	f	2023-08-27 14:12:21	f	45
+567	bm_sv	t	2022-07-27 23:54:01	f	45
+568	_gid	f	2022-07-28 21:54:03	f	45
+569	_hsstat	f	never	f	45
+570	__utmt	f	2022-07-27 22:04:02	f	45
+571	ak_bmsc	f	2022-07-27 23:54:01	t	45
+572	_uetsid	f	2022-07-28 21:54:03	f	45
+573	__utmb	f	2022-07-27 23:54:02	f	45
+574	_gat_hulu1	f	2022-07-27 21:55:03	f	45
+575	_sctr	f	2023-08-27 14:12:22	f	45
+576	_ga	f	2024-07-26 21:54:03	f	45
+577	__utmc	f	never	f	45
+578	__utmz	f	2023-01-26 08:54:02	f	45
+579	_dd_s	f	2022-07-27 22:09:02	f	45
+580	utag_main	f	2023-07-27 21:54:03	f	45
+581	metrics_tracker_session_manager	f	2022-07-27 22:24:02	f	45
+582	_uetvid	f	2023-08-21 21:54:03	f	45
+583	_hulu_assignments	t	2023-07-27 21:54:01	f	45
+584	bm_mi	t	2022-07-27 23:54:01	f	45
+585	guid	f	2022-07-27 22:24:02	f	45
+586	_hulu_metrics_context_v1_	f	2022-07-27 22:24:02	f	45
+587	_hulu_at	t	2023-07-27 21:54:01	f	45
+588	kppid	f	never	f	45
+589	_gcl_au	f	2022-10-25 21:54:03	f	45
+590	__utma	f	2024-07-26 21:54:02	f	45
+591	cl_b	t	2037-12-31 18:00:00	f	46
+592	_gcl_au	f	2022-10-25 21:54:07	f	47
+593	__cf_bm	t	2022-07-27 22:24:07	t	47
+594	OptanonConsent	f	2023-07-27 21:54:07	f	47
+595	locale	f	never	f	47
+596	__sdcfduid	t	2027-07-26 21:54:06	t	47
+597	__dcfduid	t	2027-07-26 21:54:06	t	47
+598	FPID	t	2024-07-26 21:54:09	t	48
+599	cohsn_xs_id	t	2024-07-26 21:54:08	f	48
+600	_gat	f	2022-07-27 21:55:08	f	48
+601	FPLC	t	2022-07-28 17:54:09	f	48
+602	pmpdid	t	2024-07-26 21:54:08	f	48
+603	tglr_smpl	t	2022-07-27 22:24:08	f	48
+604	tglr_tenant_id	t	2024-07-26 21:54:08	f	48
+605	_ga	f	2024-07-26 21:54:09	f	48
+606	tglr_req	t	2022-07-27 22:24:08	f	48
+607	tglr_ref	t	2022-07-27 22:24:08	f	48
+608	tglr_sess_id	t	2022-07-27 22:24:08	f	48
+609	_ga_8732QY1JF2	f	2024-07-26 21:54:09	f	48
+610	chsn_cnsnt	t	2024-07-26 21:54:08	f	48
+611	tglr_sess_count	t	2024-07-26 21:54:08	f	48
+612	tglr_http_only	t	2024-07-26 22:03:02	t	48
+613	tglr_hash_id	t	never	f	48
+614	_gid	f	2022-07-28 21:54:08	f	48
+615	usprivacy	t	2023-07-27 21:54:09	f	48
+616	tglr_anon_id	f	2024-07-26 21:54:08	f	48
+617	blab	t	2032-07-24 21:54:08	f	48
+618	sessionFunnelEventLogged	t	2022-07-28 09:54:10	f	49
+619	_auth	t	2023-07-22 21:54:10	t	49
+620	_pinterest_sess	t	2023-07-22 21:54:10	t	49
+621	_routing_id	f	2022-07-28 21:54:10	t	49
+622	csrftoken	t	2023-07-27 21:54:10	f	49
+623	rxvt	f	never	f	50
+624	mbox	f	2024-07-28 21:54:17	f	50
+625	TS01243d90	f	never	f	50
+626	d8Gbsq7y	f	2023-07-28 03:43:28	f	50
+627	PC_1_0	t	2023-07-27 21:54:16	f	50
+628	dps-pod-id	t	never	t	50
+629	AMCV_EA673DFC5A2F19060A495C9C@AdobeOrg	f	2027-07-27 21:54:16	f	50
+630	dtSa	f	never	f	50
+631	rxVisitor	f	never	f	50
+632	dtCookie	f	never	f	50
+633	v1st	f	2027-07-27 21:54:15	f	50
+634	dtPC	f	never	f	50
+635	dtLatC	f	never	f	50
+636	TS013a2c79	f	never	f	50
+637	ppnet_2777	t	never	t	50
+638	at_check	f	never	f	50
+639	session_tracker	t	2022-07-28 00:08:50	f	36
+640	edgebucket	t	2024-07-26 22:08:46	f	36
+641	csv	t	2024-07-26 22:08:47	f	36
+642	token_v2	t	2024-07-27 22:08:47	t	36
+643	loid	t	2024-07-27 22:08:47	f	36
+1265	_gcl_au	f	2022-10-25 23:36:36	f	87
+1266	_dpm_id.792d	t	2023-07-27 23:36:36	f	87
+644	_gat_gtag_UA_147262123_1	f	2022-07-27 22:53:34	f	51
+645	_gid	f	2022-07-28 22:52:34	f	51
+646	_ga	f	2024-07-26 22:52:34	f	51
+647	ci_session	f	2024-07-26 22:52:33	f	51
+648	GeoIP	t	never	f	52
+649	WMF-Last-Access	t	2022-08-28 19:35:55	t	52
+650	logged_in	t	2023-07-27 22:52:36	t	53
+651	tz	t	never	f	53
+652	_octo	t	2023-07-27 22:52:36	f	53
+653	_gh_sess	t	never	t	53
+654	_gcl_au	f	2022-10-25 22:52:41	f	54
+655	sp_pfhp	t	2022-08-26 22:52:40	f	54
+656	sp_landing	t	2022-07-28 22:52:38	t	54
+657	sp_new	t	2022-07-28 22:52:38	f	54
+658	sp_t	t	2023-07-27 22:52:38	f	54
+659	sp_m	t	2026-03-25 22:52:38	t	54
+660	_gat_global	f	2022-07-27 22:53:43	f	55
+661	_ga	f	2024-07-26 22:52:43	f	55
+662	_gat_www	f	2022-07-27 22:53:43	f	55
+663	location	f	2042-07-22 22:52:42	f	55
+664	xcj	f	2022-10-25 22:52:42	f	55
+665	wdi	f	2042-07-22 22:52:42	t	55
+666	_gid	f	2022-07-28 22:52:43	f	55
+667	hl	f	2042-07-22 22:52:42	f	55
+668	bse	f	never	t	55
+669	dtPC	t	never	f	56
+670	rxvt	t	never	f	56
+671	sc-location-v2	f	2023-07-27 22:52:48	f	56
+672	locDestZip	f	2023-07-27 22:52:48	f	56
+673	bby_prc_lb	f	2022-07-27 23:02:48	t	56
+674	CTT	f	2022-10-25 22:52:43	f	56
+675	bby_loc_lb	f	2022-07-27 23:02:48	f	56
+676	locStoreId	f	2023-07-27 22:52:48	f	56
+677	pst2	f	2022-11-24 21:52:43	f	56
+678	dtSa	t	never	f	56
+679	cto_bundle	f	2023-08-27 08:52:46	f	56
+680	CTE20	f	2022-07-28 22:52:48	f	56
+681	bby_rdp	f	2022-07-28 22:52:43	f	56
+682	dtCookie	t	never	f	56
+683	COM_TEST_FIX	f	never	f	56
+684	__gads	f	2023-08-21 22:51:54	f	56
+685	dtLatC	t	never	f	56
+686	canopy	f	2022-07-28 04:52:44	f	56
+687	vt	f	2023-07-27 22:52:43	f	56
+688	oid	f	2032-07-24 22:52:43	f	56
+689	bm_sz	f	2022-07-28 02:52:44	f	56
+690	_abck	t	2023-07-27 22:52:48	f	56
+691	bby_cbc_lb	f	2022-07-27 23:02:43	f	56
+692	physical_dma	f	2022-07-28 22:52:43	f	56
+693	__gpi	f	2023-08-21 22:51:54	f	56
+694	ltc	f	2022-07-27 23:02:48	f	56
+695	customerZipCode	f	2022-07-28 22:52:43	f	56
+696	rxVisitor	t	never	f	56
+697	SID	f	never	f	56
+698	s_cc	f	never	f	57
+699	_abck	t	2023-07-27 22:52:51	f	57
+700	bm_sv	t	2022-07-28 00:52:49	f	57
+701	aemserver	t	never	t	57
+702	AMCVS_1E22171B520E93BF0A490D44%40AdobeOr	f	never	f	57
+703	isWireless	t	never	t	57
+704	isTablet	t	never	t	57
+705	s_sess	f	never	f	57
+706	ak_bmsc	f	2022-07-28 00:52:49	t	57
+707	at_check	f	never	f	57
+708	isMobile	t	never	t	57
+709	fdx_locale	f	2042-07-22 22:52:49	f	57
+710	mbox	f	2022-07-27 23:23:52	f	57
+711	Rbt	f	never	f	57
+712	fdx_cbid	f	2042-07-22 22:52:49	f	57
+713	AMCV_1E22171B520E93BF0A490D44%40AdobeOrg	f	2024-07-27 22:52:51	f	57
+714	xacc	f	2022-07-27 23:52:51	f	57
+715	s_pers	f	2022-07-28 00:00:00	f	57
+716	s_ecid	f	2024-07-26 22:52:51	f	57
+717	bm_mi	t	2022-07-28 00:52:49	f	57
+718	bm_sz	f	2022-07-28 02:52:49	f	57
+719	siteDC	t	2022-07-28 22:52:51	t	57
+720	prov	f	2054-12-31 18:00:53	t	58
+721	AWSALBCORS	t	2022-08-03 22:52:54	f	59
+722	AMCV_1358406C534BC94D0A490D4D%40AdobeOrg	f	2024-07-27 22:52:54	f	59
+723	AWSALB	f	2022-08-03 22:52:54	f	59
+724	search_visitorId	f	2032-07-24 22:52:54	f	59
+725	s_ecid	f	2024-07-26 22:52:53	f	59
+726	nlbi_850966_2417931	t	never	f	59
+727	AMCVS_1358406C534BC94D0A490D4D%40AdobeOr	f	never	f	59
+728	at_check	f	never	f	59
+729	mbox	f	2022-07-27 23:23:54	f	59
+730	incap_ses_1434_850966	t	never	f	59
+731	visid_incap_850966	t	2023-07-27 03:21:57	t	59
+732	_clck	f	2023-07-27 22:52:56	f	60
+733	outbrain_cid_fetch	f	2022-07-27 22:57:56	f	60
+734	_hjAbsoluteSessionInProgress	t	2022-07-27 23:22:56	f	60
+735	_hjSession_227769	t	2022-07-27 23:22:56	f	60
+736	_hjIncludedInSessionSample	t	2022-07-27 22:54:56	f	60
+737	_ga_1H4VG5F5JF	f	2024-07-26 22:52:56	f	60
+738	_hjFirstSeen	t	2022-07-27 23:22:56	f	60
+739	_hjSessionUser_227769	t	2023-07-27 22:52:56	f	60
+740	_uetvid	f	2023-08-21 22:52:56	f	60
+741	explat_test_aa_weekly_lohp_2022_week_30	t	2022-08-14 19:00:52	f	60
+742	_uetsid	f	2022-07-28 22:52:56	f	60
+743	_fbp	f	2022-10-25 22:52:56	f	60
+744	fpcid	t	2023-01-23 21:52:56	f	60
+745	_pin_unauth	f	2023-07-27 22:52:56	f	60
+746	_gat	f	2022-07-27 22:53:56	f	60
+747	usprivacy	f	2022-07-28 22:52:56	f	60
+748	ccpa_applies	f	2022-07-28 22:52:56	f	60
+749	region	f	2022-07-28 04:52:55	f	60
+750	_ga	f	2024-07-26 22:52:56	f	60
+751	country_code	f	2022-07-28 04:52:55	f	60
+752	_gcl_au	f	2022-10-25 22:52:55	f	60
+753	tk_ai	t	2022-08-10 22:52:54	f	60
+754	dcmsid	f	2022-07-27 23:22:55	f	60
+755	tk_qs	f	2022-07-27 23:22:55	f	60
+756	_gid	f	2022-07-28 22:52:55	f	60
+757	landingpage_currency	f	2023-07-27 22:52:55	f	60
+758	_gat	f	2022-07-27 22:53:58	f	61
+759	_gid	f	2022-07-28 22:52:58	f	61
+760	_ga	f	2024-07-26 22:52:58	f	61
+761	NID	t	2023-01-26 21:52:57	t	61
+762	__utmc	f	never	f	62
+763	__utmb	f	2022-07-27 23:23:01	f	62
+764	__utmz	f	2023-01-26 09:53:01	f	62
+765	__utma	f	2024-07-26 22:53:01	f	62
+766	_mtma	f	never	f	62
+767	__utmd	f	2022-07-27 23:53:01	f	62
+768	PHPSESSID	f	2022-07-28 18:53:01	f	62
+769	dpio	f	never	f	63
+770	_EDGE_V	f	2023-08-21 22:53:02	t	63
+771	_EDGE_S	f	never	t	63
+772	timeZoneOffsetInMins	t	2023-07-27 22:53:06	f	63
+773	marketPref	f	2023-07-27 22:53:02	t	63
+774	MUID	t	2023-08-21 22:53:03	f	63
+775	RecentStocks	t	never	t	63
+776	PreferencesMsn	f	2023-07-27 22:53:02	t	63
+777	_gat_GSA_ENOR1	f	2022-07-27 22:54:07	f	64
+778	_4c_	f	2024-07-26 00:00:00	f	64
+779	_gat_GSA_ENOR0	f	2022-07-27 22:54:07	f	64
+780	_gid	f	2022-07-28 22:53:07	f	64
+781	_ga	f	2024-07-26 22:53:07	f	64
+782	_abck	t	2023-07-27 22:53:09	f	65
+783	bm_sv	t	2022-07-28 00:53:09	f	65
+784	UUID	t	2032-07-27 18:53:09	f	65
+785	idpmgw	t	never	t	65
+786	rxvt	t	never	f	65
+787	s_ecid	t	2024-07-26 22:53:08	f	65
+788	AMCVS_55633F7A534535110A490D44%40AdobeOr	f	never	f	65
+789	dtPC	t	never	f	65
+790	dtCookie	t	never	f	65
+791	mbox	f	2022-07-27 23:24:09	f	65
+792	at_check	f	never	f	65
+793	bm_sz	t	2022-07-28 02:53:08	f	65
+794	idse_stack	f	never	f	65
+795	att-appshell-path	f	never	f	65
+796	ak_bmsc	t	2022-07-28 00:53:08	t	65
+797	dtLatC	t	never	f	65
+798	rxVisitor	t	never	f	65
+799	AMCV_55633F7A534535110A490D44%40AdobeOrg	f	2024-07-27 22:53:08	f	65
+800	idpcloud_stack	f	never	f	65
+801	AKA_A2	t	2022-07-27 23:53:08	t	65
+802	_abck	t	2023-07-27 22:53:12	f	66
+803	AMCV_036784BD57A8BB277F000101%40AdobeOrg	t	2024-07-27 22:53:11	f	66
+804	dayssincevisit_s	t	2022-07-27 23:23:11	f	66
+805	dayssincevisit	t	2025-07-26 22:53:11	f	66
+806	aam_cms	f	2022-11-24 21:53:12	f	66
+807	_fbp	f	2022-10-25 22:53:11	f	66
+808	s_invisit	t	2022-07-27 23:23:11	f	66
+809	s_nr	t	2022-08-26 22:53:11	f	66
+810	sharedsession	t	never	t	66
+811	_gcl_au	f	2022-10-25 22:53:11	f	66
+812	mbox	t	2022-07-27 23:24:11	f	66
+813	at_check	t	never	f	66
+814	aam_uuid	t	2022-11-24 21:53:12	f	66
+815	ak_bmsc	f	2022-07-28 00:53:09	t	66
+816	s_vnum	t	2022-08-01 00:00:00	f	66
+817	JSESSIONID	t	never	t	66
+818	utag_main	t	2023-07-27 22:53:11	f	66
+819	AMCVS_036784BD57A8BB277F000101%40AdobeOr	t	never	f	66
+820	s_cc	t	never	f	66
+821	ups_language_preference	t	2024-07-26 22:53:10	t	66
+822	bm_sz	f	2022-07-28 02:53:10	f	66
+823	_cc	f	2023-07-27 17:53:14	f	67
+824	s_nr	f	2022-08-26 22:53:14	f	67
+825	gpv_p4	f	2022-07-27 23:23:14	f	67
+826	_gat_gtag_UA_84753935_1	f	2022-07-27 22:54:14	f	67
+827	_ga	f	2024-07-26 22:53:14	f	67
+828	_sp_id.73e1	f	2024-07-26 22:53:14	f	67
+829	_gcl_au	f	2022-10-25 22:53:14	f	67
+830	locale_pref	f	never	f	67
+831	s_cc	f	never	f	67
+832	s_ecid	f	2024-07-26 22:53:14	f	67
+833	SIC_signin	f	never	f	67
+834	_sp_ses.73e1	f	2022-07-27 23:23:14	f	67
+835	C1_CCID	f	never	f	67
+836	mbox	f	2022-07-27 23:24:14	f	67
+837	at_check	f	never	f	67
+838	w82S5kL1	f	2072-07-27 01:53:12	f	67
+839	TLTSID	f	2022-07-28 00:53:12	f	67
+840	AMCV_317906C354252E890A4C98BC%40AdobeOrg	f	2024-07-27 22:53:13	f	67
+841	SIC_RM	f	never	f	67
+842	AMCVS_317906C354252E890A4C98BC%40AdobeOr	f	never	f	67
+843	ISSO_CNTRY_CODE	f	never	f	67
+844	_gid	f	2022-07-28 22:53:14	f	67
+845	TLTUID	f	2027-07-26 22:53:12	f	67
+846	AMCVS_9E1005A551ED61CA0A490D45%40AdobeOr	t	never	f	68
+847	feds_visitor_audience	f	2022-08-27 22:53:16	f	68
+848	AMCV_9E1005A551ED61CA0A490D45%40AdobeOrg	t	2024-07-27 22:53:16	f	68
+849	feds_visitor_id	f	2022-08-27 22:53:16	f	68
+850	bm_sv	t	2022-07-28 00:53:16	f	68
+851	sat_domain	f	2022-07-27 22:53:17	f	68
+852	fg	t	2022-07-28 22:53:16	f	68
+853	mbox	f	2022-07-27 23:24:17	f	68
+854	ak_bmsc	f	2022-07-28 00:53:15	t	68
+855	at_check	f	never	f	68
+856	AKA_A2	t	2022-07-27 23:53:15	t	68
+857	_pnxd	f	2024-07-26 22:53:19	f	69
+858	_cs_c	t	2023-08-27 08:53:19	f	69
+859	bounceClientVisit2045v	f	2022-07-27 23:23:20	f	69
+860	_cs_ex	t	2022-08-26 22:53:19	f	69
+861	__idcontext	t	2023-08-26 22:53:20	f	69
+862	_pnss	f	2024-07-26 22:53:19	f	69
+863	pushly.user_puuid	f	2024-07-26 22:53:19	f	69
+864	lux_uid	f	2022-07-27 23:23:17	f	69
+865	_gat	f	2022-07-27 22:54:19	f	69
+866	usprivacy	f	2023-07-27 22:53:17	f	69
+867	_ga	f	2024-07-26 22:53:19	f	69
+868	_pndnt	f	2024-07-26 22:53:19	f	69
+869	AMP_TOKEN	f	2022-07-27 23:53:19	f	69
+870	_parsely_session	f	2022-07-27 23:23:18	f	69
+871	_gid	f	2022-07-28 22:53:19	f	69
+872	OptanonConsent	f	2023-07-27 22:53:18	f	69
+873	_pnvl	f	2024-07-26 22:53:19	f	69
+874	_parsely_visitor	f	2023-08-27 08:53:18	f	69
+875	lrid	f	2024-07-27 22:53:22	f	70
+876	_pin_unauth	f	2023-07-27 22:53:22	f	70
+877	_ibp	f	2024-07-26 22:53:22	f	70
+878	TapAd_DID	f	never	f	70
+879	gtinfo	f	never	f	70
+880	AMCV_16AD4362526701720A490D45%40AdobeOrg	f	2024-07-27 22:53:22	f	70
+881	lrt_wrk	f	never	f	70
+882	_rdt_uuid	t	2022-10-25 22:53:22	f	70
+883	VisitorId	f	2032-07-27 22:53:20	f	70
+884	fpci	f	never	f	70
+885	AMCVS_16AD4362526701720A490D45%40AdobeOr	f	never	f	70
+886	ui	f	never	f	70
+887	mnet_session_depth	t	never	f	70
+888	aam	f	2023-01-23 21:53:22	f	70
+889	s_cc	f	never	f	70
+890	_ga	f	2024-07-26 22:53:21	f	70
+891	_ga_3ZVJC9H4TB	f	2024-07-26 22:53:21	f	70
+892	check	f	never	f	70
+893	ck_consent	f	2022-08-26 22:53:21	f	70
+894	s_ecid	f	2024-07-26 22:53:22	f	70
+895	mbox	f	2022-07-27 23:24:22	f	70
+896	_ibs	f	2022-07-27 23:23:22	f	70
+897	_fbp	f	2022-10-25 22:53:22	f	70
+898	aam_uuid	f	2022-08-26 22:53:22	f	70
+1267	_gat_tealium_0	f	2022-07-27 23:37:35	f	87
+1268	dclid	f	never	f	87
+1269	ck_web	t	2023-07-27 23:36:34	t	87
+1270	utag_main	f	2023-07-27 23:36:35	f	87
+1271	_gat	f	2022-07-27 23:37:35	f	87
+1272	_gid	f	2022-07-28 23:36:35	f	87
+1273	bm_sz	f	2022-07-28 03:36:34	f	87
+1274	_abck	t	2023-07-27 23:36:34	f	87
+1275	gclid	f	never	f	87
+1276	ak_bmsc	f	2022-07-28 01:36:34	t	87
+1277	FID	t	2032-07-24 23:36:34	t	87
+1278	_dpm_ses.792d	t	2022-07-28 00:06:36	f	87
+1279	CKTRACEID	t	2022-08-10 23:36:34	t	87
+1280	_ttp	f	2023-08-21 23:36:36	f	87
+1281	_ga_0VHWHRFT7Z	f	2024-07-26 23:36:36	f	87
+1282	CKTRKID	t	2032-07-24 23:36:34	f	87
+1283	__j_state	f	2022-07-27 23:56:38	f	88
+1284	GLAM-AID	f	2022-08-26 23:36:38	f	88
+1285	_fbp	f	2022-10-25 23:36:38	f	88
+1286	m_section	f	2023-07-27 23:36:38	f	88
+1287	GLAM-JID	f	2022-07-27 23:56:38	f	88
+1288	is_emerald	t	2022-08-03 23:36:38	f	88
+1289	m_sort	f	2023-07-27 23:36:38	f	88
+1290	amplitude_id_f1fc2abcb6d136bd4ef338e7fc0	f	2032-07-24 23:36:38	f	88
+1291	postpagebeta	f	2090-09-04 15:00:53	f	88
+1292	_gid	f	2022-07-28 23:36:37	f	88
+1293	cs_is_valid	f	2022-07-28 23:36:39	f	88
+1294	GLAM-SID	f	never	f	88
+1295	is_authed	t	2022-08-03 23:36:38	f	88
+1296	_ga	f	2024-07-26 23:36:37	f	88
+1297	_gat	f	2022-07-27 23:37:38	f	88
+899	_lr_sampling_rate	f	2022-07-28 23:21:58	f	71
+900	_pxff_cde	f	2022-07-27 23:22:57	f	71
+901	_pxff_idp_c	f	2022-07-27 23:22:57	f	71
+902	_pxvid	f	2023-07-27 23:21:57	f	71
+903	__fp	f	2022-07-28 23:21:57	f	71
+904	pxcts	f	never	f	71
+905	_ga_MS5EHT6J6V	f	2024-07-26 23:21:56	f	71
+906	_clck	f	2023-07-27 23:21:56	f	71
+907	_tas	f	2022-07-27 23:36:56	f	71
+908	cto_bundle	f	2023-08-21 23:21:57	f	71
+909	_ta	f	2022-08-03 23:21:56	f	71
+910	AMCVS_AMCV_8853394255142B6A0A4C98A4%40Ad	f	never	f	71
+911	_tac	f	2022-08-03 23:21:56	f	71
+912	_uetvid	f	2023-08-21 23:21:56	f	71
+913	_uetsid	f	2022-07-28 23:21:56	f	71
+914	ajs_anonymous_id	f	2023-07-27 23:21:55	f	71
+915	AMCV_8853394255142B6A0A4C98A4%40AdobeOrg	f	2024-07-27 23:21:56	f	71
+916	_ga	f	2024-07-26 23:21:56	f	71
+917	_ncg_sp_ses.cc72	t	2022-07-27 23:51:56	f	71
+918	_gat	f	2022-07-27 23:22:56	f	71
+919	__split	f	2023-07-27 23:21:55	f	71
+920	_ncg_id_	f	2024-07-26 23:21:55	f	71
+921	s_ecid	f	2024-07-26 23:21:55	f	71
+922	adcloud	f	2024-07-27 23:21:56	f	71
+923	__gads	f	2023-08-21 23:21:02	f	71
+924	_ncg_sp_id.cc72	t	2024-07-26 23:21:56	f	71
+925	__ssnstarttime	f	never	f	71
+926	_gid	f	2022-07-28 23:21:56	f	71
+927	_fbp	f	2022-10-25 23:21:56	f	71
+928	AMCV_AMCV_8853394255142B6A0A4C98A4%40Ado	f	2024-07-27 23:21:56	f	71
+929	G_ENABLED_IDPS	f	unknown	f	71
+930	AMCVS_8853394255142B6A0A4C98A4%40AdobeOr	f	never	f	71
+931	__vst	f	2042-07-22 23:21:53	f	71
+932	__pxvid	f	2023-07-28 23:21:57	f	71
+933	_pxff_bdd	f	2022-07-27 23:22:57	f	71
+934	split_tcv	f	2023-07-27 23:21:53	f	71
+935	_clsk	f	2022-07-28 23:21:57	f	71
+936	_gcl_au	f	2022-10-25 23:21:55	f	71
+937	_pbjs_userid_consent_data	f	2022-08-26 23:21:54	f	71
+938	__ssn	f	never	f	71
+939	QSI_HistorySession	t	never	f	71
+940	split	f	2023-07-27 23:21:53	f	71
+941	_lr_env_src_ats	f	2022-08-26 23:22:08	f	72
+942	bm_sv	t	2022-07-28 01:22:03	f	72
+943	__gpi	f	2023-08-21 23:21:13	f	72
+944	AKA_A2	t	2022-07-28 00:21:59	t	72
+945	__gads	f	2023-08-21 23:21:10	f	72
+946	__aaxsc	f	never	f	72
+947	krg_crb	f	2026-07-26 23:22:01	f	72
+948	aasd	t	never	f	72
+949	mol.ads.visits	f	2022-08-27 23:22:00	f	72
+950	spotim_visitId	f	2022-07-27 23:52:02	f	72
+951	cto_bundle	f	2023-08-21 23:22:07	f	72
+952	uuid	f	2122-07-03 23:22:02	f	72
+953	_dd_s	f	2022-07-27 23:37:02	f	72
+954	krg_uid	f	2026-07-26 23:22:01	f	72
+955	ak_bmsc	f	2022-07-28 01:22:00	t	72
+956	_ga	f	2024-07-26 23:22:00	f	72
+957	_pbjs_userid_consent_data	f	2022-08-26 23:22:04	f	72
+958	_ga_TVTS9NE0FM	f	2024-07-26 23:22:06	f	72
+959	mol.ads.visitsExpire	f	2022-08-27 23:22:00	f	72
+960	_pubcid	f	2023-07-27 23:22:08	f	72
+961	_gat_gtag_UA_3639451_11	f	2022-07-27 23:23:00	f	72
+962	_lr_retry_request	f	2022-07-28 00:22:08	f	72
+963	dm_clientsegment	f	2025-04-22 23:22:00	f	72
+964	_gid	f	2022-07-28 23:22:00	f	72
+965	usprivacy	f	2022-08-26 23:22:02	f	72
+966	krgtst	f	2022-07-27 23:22:11	f	72
+967	_gid	f	2022-07-28 23:22:12	f	73
+968	_ga	f	2024-07-26 23:22:12	f	73
+969	_uetvid	f	2023-08-21 23:22:12	f	73
+970	_uetsid	f	2022-07-28 23:22:12	f	73
+971	_gcl_au	f	2022-10-25 23:22:12	f	73
+972	_fbp	f	2022-10-25 23:22:12	f	73
+973	kndctr_DA11332E5321D0550A490D45_AdobeOrg	f	2022-07-27 23:52:12	f	73
+974	aam_sitecore	f	2022-11-24 22:22:12	f	73
+975	s_sess	f	never	f	73
+976	dig-prd_po	t	2022-07-27 23:52:10	t	73
+977	s_pers	f	2024-07-26 23:22:11	f	73
+978	at_check	f	never	f	73
+979	_abck	t	2023-07-27 23:22:10	f	73
+980	mbox	f	2022-07-27 23:53:11	f	73
+981	AMCV_DA11332E5321D0550A490D45%40AdobeOrg	f	2024-07-27 23:22:10	f	73
+982	fltk	f	2022-08-26 23:22:12	f	73
+983	ak_bmsc	f	2022-07-28 01:22:07	t	73
+984	bm_sv	t	2022-07-28 01:22:09	f	73
+985	bm_sz	f	2022-07-28 03:22:07	f	73
+986	bm_mi	t	2022-07-28 01:22:08	f	73
+987	_gat	f	2022-07-27 23:23:12	f	73
+988	SC	t	2022-07-27 23:42:10	f	73
+989	SC_ANALYTICS_GLOBAL_COOKIE	t	2032-07-24 23:22:09	t	73
+990	az_west	t	2022-07-27 23:52:09	f	73
+991	Channel	t	never	f	73
+992	Affiliate	t	never	f	73
+993	ipe_s	f	never	f	73
+994	sc_session	t	never	t	73
+995	AMCVS_DA11332E5321D0550A490D45%40AdobeOr	f	never	f	73
+996	bounceClientVisit1369v	f	2022-07-27 23:52:13	f	73
+997	www-prd_po	t	2022-07-27 23:54:27	f	73
+998	kndctr_DA11332E5321D0550A490D45_AdobeOrg	f	2023-08-26 23:22:12	f	73
+999	AKA_A2	t	2022-07-28 00:22:08	t	73
+1000	PSC	t	2023-07-27 23:22:10	f	73
+1001	A1S	t	never	f	74
+1002	A3	t	2023-07-28 05:22:14	t	74
+1003	cmp	t	2023-07-27 23:22:14	f	74
+1004	A1	t	2023-07-28 05:22:14	t	74
+1005	jwt-session	t	2022-07-28 23:22:19	t	75
+1006	uber_sites_geolocalization	f	2023-07-27 23:22:18	f	75
+1007	marketing_vistor_id	t	2023-07-27 23:22:19	f	75
+1008	utag_geo_code	f	2022-08-24 23:22:19	f	75
+1009	segmentCookie	f	2099-12-30 18:00:00	f	75
+1010	utag_main	f	2023-07-27 23:22:19	f	75
+1011	_ua	t	never	f	75
+1012	auth.strategy	t	never	f	76
+1013	_gid	f	2022-07-28 23:22:22	f	76
+1014	i18n_redirected	f	2023-07-27 23:22:22	f	76
+1015	_gat_UA-114714674-1	f	2022-07-27 23:23:22	f	76
+1016	_ga_N0GP6FDRPH	f	2024-07-26 23:22:22	f	76
+1017	_ga	f	2024-07-26 23:22:22	f	76
+1018	ndsid	t	2022-07-28 00:22:33	f	78
+1019	___r124934	t	2024-07-26 23:22:33	f	78
+1020	_gat_gtag_UA_107148943_1	t	2022-07-27 23:23:33	f	78
+1021	_gid	t	2022-07-28 23:22:33	f	78
+1022	_gcl_au	t	2022-08-26 23:22:33	f	78
+1023	ADRUM_BTa	t	2022-07-27 23:23:01	t	78
+1024	aam_uuid	t	2022-08-26 23:22:32	f	78
+1025	AMCV_1BAA15F354F731E60A4C98A4%40AdobeOrg	t	2024-07-27 23:22:32	f	78
+1026	LSESSIONID	t	never	f	78
+1027	_ga	t	2022-08-26 23:22:33	f	78
+1028	_cls_s	t	never	f	78
+1029	SameSite	t	2022-07-27 23:23:01	t	78
+1030	AMCVS_1BAA15F354F731E60A4C98A4%40AdobeOr	t	never	f	78
+1031	dti_apg	t	2022-08-26 23:22:33	f	78
+1032	__gdic	t	2024-07-26 23:22:33	f	78
+1033	___tk124934	f	never	f	78
+1034	wfacookie	t	2032-07-24 23:22:30	t	78
+1035	ADRUM_BT1	t	2022-07-27 23:23:01	t	78
+1036	utag_main	t	2023-07-27 23:22:32	f	78
+1037	wcmcookiewf	t	never	t	78
+1038	wcmcookiehp	t	never	t	78
+1039	___so124934	t	never	f	78
+1040	_imp_di_pc_	t	2023-07-27 23:22:33	f	78
+1041	WesdAksn	t	2072-07-27 02:22:30	f	78
+1042	_cls_v	t	2027-07-26 23:22:32	f	78
+1043	ISD_WWWAF_COOKIE	t	never	t	78
+1044	ISD_WCM_COOKIE	t	never	t	78
+1045	CookiesAreEnabled	t	never	t	78
+1046	INLANG	t	2023-07-27 23:22:30	t	78
+1047	awx_aiv_home	f	2022-08-06 23:22:34	f	79
+1048	FCNEC	f	2023-07-27 23:22:37	f	79
+1049	_fbp	f	2022-10-25 23:22:36	f	79
+1050	user-timing	f	2023-07-27 23:22:34	f	79
+1051	__gads	f	2023-08-21 23:21:42	f	79
+1052	__gpi	f	2023-08-21 23:21:42	f	79
+1053	cnx_userId	f	2022-08-26 23:22:35	f	79
+1054	ak_bmsc	f	2022-07-28 01:22:34	t	79
+1055	_pnvl	f	2024-07-26 23:22:34	f	79
+1056	us_privacy	f	2023-07-27 23:22:34	f	79
+1057	_pnss	f	2024-07-26 23:22:34	f	79
+1058	awx_user	f	2023-07-27 23:22:34	f	79
+1059	pushly.user_puuid	f	2024-07-26 23:22:34	f	79
+1060	_parsely_visitor	f	2023-08-27 09:22:34	f	79
+1061	_gid	f	2022-07-28 23:22:34	f	79
+1062	_gat_awxTracker	f	2022-07-27 23:23:34	f	79
+1063	_ga	f	2024-07-26 23:22:34	f	79
+1064	_pndnt	f	2024-07-26 23:22:34	f	79
+1065	awx_session_essential	t	2022-07-27 23:32:34	t	79
+1066	AKA_A2	t	2022-07-28 00:22:34	t	79
+1067	userid3p	f	2023-07-27 23:22:34	f	79
+1068	_parsely_session	f	2022-07-27 23:52:34	f	79
+1069		f	never	f	79
+1070	awx_id	t	2023-07-27 23:22:34	t	79
+1071	analytics_session_id	f	2022-07-27 23:52:51	f	81
+1072	_ttp	f	2023-08-21 23:22:50	f	81
+1073	patreon_location_country_code	f	2042-07-22 23:22:44	f	81
+1074	_rdt_uuid	t	2022-10-25 23:22:50	f	81
+1075	_gid	f	2022-07-28 23:22:49	f	81
+1076	datadome	t	2023-07-27 23:22:50	f	81
+1077	_gat_gtag_UA_40726300_1	f	2022-07-27 23:23:49	f	81
+1078	_tt_enable_cookie	f	2023-08-21 23:22:50	f	81
+1079	_ga	f	2024-07-26 23:22:49	f	81
+1080	_gcl_au	f	2022-10-25 23:22:48	f	81
+1081	_ALGOLIA	f	2023-01-23 22:22:47	f	81
+1082	_fbp	f	2022-10-25 23:22:50	f	81
+1083	patreon_device_id	f	2042-07-22 23:22:44	f	81
+1084	__cf_bm	t	2022-07-27 23:52:44	t	81
+1085	patreon_locale_code	f	2042-07-22 23:22:44	f	81
+1086	OptanonConsent	t	2023-01-23 22:23:06	f	82
+1087	cdp_seg	t	2022-10-25 23:23:04	f	82
+1088	ep203	t	2022-10-25 23:23:04	t	82
+1089	ep202	t	2022-10-25 23:23:04	f	82
+1090	ep201	t	2022-07-27 23:53:04	f	82
+1091	attr_multitouch	t	2023-07-27 23:23:04	f	82
+1092	__ar_v4	f	2023-07-27 23:23:12	f	83
+1093	ak_bmsc	f	2022-07-28 01:23:09	t	83
+1094	bm_sv	t	2022-07-28 01:23:10	f	83
+1095	_evga_5f1e	f	2024-07-26 23:23:11	f	83
+1096	OptanonConsent	f	2023-07-27 23:23:11	f	83
+1097	_sfid_8b89	f	2024-07-26 23:23:11	f	83
+1098	_ga_3VHBZ2DJWP	f	2024-07-26 23:23:11	f	83
+1099	_gid	f	2022-07-28 23:23:10	f	83
+1100	_dc_gtm_UA-118367394-2	f	2022-07-27 23:24:11	f	83
+1101	_ga	f	2024-07-26 23:23:11	f	83
+1102	_gcl_au	f	2022-10-25 23:23:10	f	83
+1103	v20	t	never	f	83
+1104	cleared-onetrust-cookies	f	2023-07-27 18:23:10	f	83
+1105	lastvaliddriver	f	2022-08-03 23:23:09	f	83
+1106	convertingPageUrl	t	never	f	83
+1107	c40	f	never	f	83
+1108	__adroll_fpc	f	2023-07-28 05:23:12	f	83
+1109	cvtdt	f	2032-07-24 23:23:09	f	83
+1110	c22	f	never	f	83
+1111	v0	f	never	f	83
+1112	webact	f	2023-07-27 23:23:09	f	83
+1113	optimizelyEndUserId	f	2023-01-23 22:23:10	f	83
+1114	QuantumMetricSessionLink	t	never	f	84
+1115	QuantumMetricSessionID	t	2022-07-27 23:53:17	f	84
+1116	_abck	t	2023-07-27 23:23:16	f	84
+1117	incap_ses_1534_2490223	f	never	f	84
+1118	kampyleSessionPageCounter	t	2023-07-27 23:23:16	f	84
+1119	kampyleUserSession	t	2023-07-27 23:23:16	f	84
+1120	mdLogger	t	2023-07-27 23:23:16	f	84
+1121	_br_uid_2	f	2122-07-03 23:23:16	f	84
+1122	mp_cvs_mixpanel	f	2023-07-27 23:23:16	f	84
+1123	_4c_	f	2024-07-26 00:00:00	f	84
+1124	s_cc	f	never	f	84
+1125	gpv_e5	f	2022-07-27 23:53:15	f	84
+1126	AMCV_06660D1556E030D17F000101%40AdobeOrg	f	2024-07-27 23:23:15	f	84
+1127	nlbi_2490223_2484222	f	never	f	84
+1128	rxlitelob	f	never	f	84
+1129	visid_incap_2490223	f	2023-07-27 01:19:03	t	84
+1130	QuantumMetricUserID	t	2023-07-27 23:23:16	f	84
+1131	rxd_bnr	f	never	f	84
+1132	_group1	f	2099-12-30 18:00:00	f	84
+1133	_group7	f	2099-12-30 18:00:00	f	84
+1134	mt.v	f	2032-07-24 23:23:14	f	84
+1135	gb	f	2022-09-20 19:00:53	f	84
+1136	gr	f	2022-09-20 19:00:53	f	84
+1137	hdnew	f	never	f	84
+1138	hmnew	f	never	f	84
+1139	ps	f	2022-09-25 23:23:14	f	84
+1140	nwvc	f	2022-09-20 19:00:53	f	84
+1141	sub_v2	f	never	f	84
+1142	sub_api_v2	f	never	f	84
+1143	enable_imz_cvd	f	never	f	84
+1144	enable_imz_gs	f	never	f	84
+1145	sl_v2	f	never	f	84
+1146	sab_displayads	f	2022-09-25 23:23:14	f	84
+1147	untieLegacyRx	f	never	f	84
+1148	show_exception_status	f	2022-09-25 23:23:14	f	84
+1149	sft_mfr_new	f	never	f	84
+1150	s2c_s2chero	f	2022-09-25 23:23:14	f	84
+1151	dpp_sft	f	never	f	84
+1152	acct_pe	f	never	f	84
+1153	s2c_rewardstrackerdob	f	never	f	84
+1154	s2c_rewardstrackerbctenpercent	f	never	f	84
+1155	rxm	f	2022-09-25 23:23:14	f	84
+1156	s2c_rewardstrackerbctile	f	never	f	84
+1157	ak_bmsc	f	2022-07-28 01:23:14	t	84
+1158	s2c_cmxadc	f	never	f	84
+1159	sub_cp_fmf	f	never	f	84
+1160	pe	f	never	f	84
+1161	s2c_beautyclub	f	2022-09-25 23:23:14	f	84
+1162	aat1	f	2022-09-25 23:23:14	f	84
+1163	sftg	f	2022-09-25 23:23:14	f	84
+1164	kampyleUserSessionsCount	t	2023-07-27 23:23:16	f	84
+1165	enable_imz_reschedule_multiplendc	f	never	f	84
+1166	rxmsecques	f	never	f	84
+1167	kampyle_userid	t	2023-07-27 23:23:16	f	84
+1168	rxm_demo_hide_LN	f	never	f	84
+1169	newauthflow	f	never	f	84
+1170	rxm_ph_dob	f	2022-09-25 23:23:14	f	84
+1171	enable_imz_reschedule_clinic	f	never	f	84
+1172	AMCVS_06660D1556E030D17F000101%40AdobeOr	f	never	f	84
+1173	bm_sz	f	2022-07-28 03:23:14	f	84
+1174	rxduan	f	never	f	84
+1175	gpv_p10	f	2022-07-27 23:53:15	f	84
+1176	rxdpromo	f	never	f	84
+1177	enable_imz	f	never	f	84
+1178	rxm_rx_challenge	f	never	f	84
+1179	pivotal_forgot_password	f	2022-09-25 23:23:14	f	84
+1180	pivotal_sso	f	2022-09-25 23:23:14	f	84
+1181	rxdfixie	f	never	f	84
+1182	_gcl_au	f	2022-10-25 23:23:15	f	84
+1183	acct_pymt	f	never	f	84
+1184	acctdel_v1	f	never	f	84
+1185	mc_hl7	f	never	f	84
+1186	easy_xfer	f	never	f	84
+1187	mcpe	f	never	f	84
+1188	mc_cloud_service	f	never	f	84
+1189	imz_onestr	f	never	f	84
+1190	disable-app-dynamics	f	never	f	84
+1191	s2c_securecard	f	2022-09-25 23:23:14	f	84
+1192	pauth_v1	f	never	f	84
+1193	db-show-allrx	f	never	f	84
+1194	dpp_cdc	f	never	f	84
+1195	ice-phr-offer	f	never	f	84
+1196	gbp_api_v2	f	never	f	84
+1197	gbi_cvs_coupons	f	never	f	84
+1198	aat2	f	2022-09-25 23:23:14	f	84
+1199	incap_ses_1245_2490223	f	never	f	84
+1200	rxdanshownba	f	never	f	84
+1201	adh_ps_refill	f	never	f	84
+1202	enable_imz_reschedule_instore	f	never	f	84
+1203	acct_v1	f	never	f	84
+1204	v3redirecton	f	never	f	84
+1205	_group8	f	2099-12-30 18:00:00	f	84
+1206	rxd_dot_bnr	f	never	f	84
+1207	slistview	f	2022-09-25 23:23:14	f	84
+1208	adh_ps_pickup	f	2022-10-25 23:23:14	f	84
+1209	v2-dash-redirection	f	never	f	84
+1210	easy_xfer100	f	never	f	84
+1211	dpp_drug_dir	f	never	f	84
+1212	ADRUM_BT	t	2022-07-27 23:23:45	f	84
+1213	rxtiemm	f	never	f	84
+1214	buynow	f	never	f	84
+1215	bab_cc	f	never	f	84
+1216	acct_v2	f	never	f	84
+1217	enable_imz_notimeslot_cache	f	never	f	84
+1218	dashboard_v1	f	never	f	84
+1219	_fbp	f	2022-10-25 23:23:15	f	84
+1220	utag_main	f	2023-07-27 23:23:15	f	84
+1221	acct_ranch	f	never	f	84
+1222	footer_new_V1	f	never	f	84
+1223	mc_videovisit	f	2022-09-25 23:23:14	f	84
+1224	acct_gp	f	never	f	84
+1225	akavpau_www_cvs_com_general	t	never	t	84
+1226	accnt_ph2	f	never	f	84
+1227	bm_sv	t	2022-07-28 01:23:15	f	84
+1228	acct_gac	f	never	f	84
+1229	adh_new_ps	f	never	f	84
+1230	_ga	f	2024-07-26 23:23:21	f	85
+1231	_biz_pendingA	f	2023-07-27 23:23:20	f	85
+1232	_ga_6DMR3MTLY8	f	2024-07-26 23:23:21	f	85
+1233	_biz_sid	f	2022-07-27 23:53:20	f	85
+1234	_biz_uid	f	2023-07-27 23:23:20	f	85
+1235	_gat_UA-217499332-1	f	2022-07-27 23:24:20	f	85
+1236	_gid	f	2022-07-28 23:23:20	f	85
+1237	_biz_flagsA	f	2023-07-27 23:23:20	f	85
+1238	_mkto_trk	f	2024-07-26 23:23:20	f	85
+1239	_biz_nA	f	2023-07-27 23:23:20	f	85
+1240	_gcl_au	f	2022-10-25 23:23:20	f	85
+1241	_tt_enable_cookie	f	2023-08-21 23:23:27	f	86
+1242	_dpm_id.792d	t	2023-07-27 23:23:27	f	86
+1243	_ga	f	2024-07-26 23:23:27	f	86
+1244	_fbp	f	2022-10-25 23:23:27	f	86
+1245	_gcl_au	f	2022-10-25 23:23:27	f	86
+1246	_gat_tealium_0	f	2022-07-27 23:24:27	f	86
+1247	dclid	f	never	f	86
+1248	_gid	f	2022-07-28 23:23:27	f	86
+1249	ck_web	t	2023-07-27 23:23:25	t	86
+1250	_gat	f	2022-07-27 23:24:26	f	86
+1251	utag_main	f	2023-07-27 23:23:26	f	86
+1252	bm_sz	f	2022-07-28 03:23:25	f	86
+1253	_abck	t	2023-07-27 23:23:25	f	86
+1254	gclid	f	never	f	86
+1255	ak_bmsc	f	2022-07-28 01:23:25	t	86
+1256	FID	t	2032-07-24 23:23:25	t	86
+1257	_dpm_ses.792d	t	2022-07-27 23:53:27	f	86
+1258	CKTRACEID	t	2022-08-10 23:23:25	t	86
+1259	_ttp	f	2023-08-21 23:23:27	f	86
+1260	_ga_0VHWHRFT7Z	f	2024-07-26 23:23:27	f	86
+1261	CKTRKID	t	2032-07-24 23:23:25	f	86
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.users (id, username, email, password) FROM stdin;
+1	joe	joe@email.com	password
+2	FirstdbCall	test1@gmail.com	\N
+\.
+
+
+--
+-- Data for Name: websites; Type: TABLE DATA; Schema: public; Owner: -
+--
+
+COPY public.websites (id, url, rating, cookie_number_rating, cookie_security_rating, cookie_expires_rating) FROM stdin;
+29	https://www.duckduckgo.com	100	33	33	33
+17	https://www.weather.com	37	0	7	30
+18	https://www.nytimes.com	35	0	6	29
+19	https://www.ebay.com	64	21	16	27
+20	https://www.twitch.tv	35	7	6	22
+26	https://www.tiktok.com	61	21	13	26
+27	https://www.etsy.com	37	3	4	30
+28	https://www.tapresearch.com	44	13	3	28
+30	https://www.office.com	65	19	18	27
+31	https://www.microsoft.com	56	13	17	25
+32	https://www.live.com	57	25	16	16
+33	https://www.zillow.com	29	1	3	25
+34	https://www.espn.com	17	0	0	16
+35	https://www.jpost.com	28	0	2	25
+37	https://www.instructure.com	48	27	0	21
+38	https://www.homedepot.com	28	0	3	24
+39	https://www.foxnews.com	31	0	2	28
+40	https://www.intuit.com	29	0	4	24
+41	https://www.onlyfans.com	95	29	33	33
+42	https://www.quizlet.com	39	0	17	22
+43	https://www.target.com	48	11	8	29
+44	https://www.zoom.us	36	0	9	27
+45	https://www.hulu.com	31	0	2	28
+46	https://www.craigslist.org	80	31	16	33
+47	https://www.discord.com	64	21	16	27
+48	https://www.healthline.com	44	0	13	30
+49	https://www.pinterest.com	77	23	22	31
+1	https://www.google.com	75	23	19	32
+2	https://www.youtube.com	74	23	26	25
+3	https://www.facebook.com	87	27	27	33
+4	https://www.amazon.com	56	19	9	28
+5	https://www.apple.com	44	11	16	16
+6	https://www.reddit.com	65	23	16	26
+7	https://www.wikipedia.org	76	27	27	22
+8	https://www.yahoo.com	64	21	16	27
+9	https://www.twitter.com	69	21	16	32
+10	https://www.bing.com	55	11	17	26
+11	https://www.instagram.com	78	25	20	33
+12	https://www.paypal.com	68	15	29	24
+13	https://www.fandom.com	32	0	1	31
+14	https://www.walmart.com	33	0	7	25
+15	https://www.microsoftonline.com	61	23	19	19
+16	https://www.linkedin.com	57	27	10	20
+21	https://www.indeed.com	75	19	23	32
+22	https://www.quora.com	58	25	0	33
+23	https://www.imdb.com	33	1	1	31
+24	https://www.usps.com	28	0	5	23
+50	https://www.chase.com	16	1	5	10
+36	https://www.reddit.com/	74	23	19	32
+25	https://www.cnn.com	28	0	5	23
+51	https://www.mangakakalot.com	56	25	0	31
+52	https://www.wikimedia.org	70	29	24	16
+53	https://www.github.com	66	25	24	16
+54	https://www.spotify.com	72	21	19	32
+55	https://www.yelp.com	46	15	3	28
+56	https://www.bestbuy.com	27	0	4	22
+57	https://www.fedex.com	28	0	10	18
+58	https://www.stackoverflow.com	80	31	16	33
+59	https://www.t-mobile.com	38	11	7	20
+60	https://www.wordpress.com	36	0	4	31
+61	https://www.blogspot.com	64	25	8	31
+62	https://www.mangago.me	41	19	0	22
+63	https://www.msn.com	53	17	16	20
+64	https://www.nih.gov	54	23	0	31
+65	https://www.att.com	27	0	12	14
+66	https://www.ups.com	39	0	15	24
+67	https://www.capitalone.com	20	0	0	20
+68	https://www.adobe.com	46	11	10	25
+69	https://www.nypost.com	34	0	2	32
+70	https://www.webmd.com	21	0	1	20
+71	https://www.realtor.com	28	0	1	26
+72	https://www.dailymail.co.uk	32	0	3	29
+73	https://www.xfinity.com	33	0	8	24
+74	https://www.aol.com	74	25	24	24
+75	https://www.uber.com	56	19	9	27
+76	https://www.mangadex.org	50	21	2	26
+78	https://www.wellsfargo.com	42	0	21	21
+79	https://www.accuweather.com	35	0	4	30
+81	https://www.patreon.com	39	3	4	32
+82	https://www.surveymonkey.com	72	21	18	32
+83	https://www.force.com	27	0	2	24
+84	https://www.cvs.com	14	0	2	12
+85	https://www.theoremreach.com	43	11	0	32
+86	https://www.gimbal.com	37	0	8	29
+87	https://www.creditkarma.com	37	0	8	29
+88	https://www.imgur.com	34	3	2	29
+77	https://www.sharepoint.com	100	33	33	33
+80	https://www.alchemer.com	100	33	33	33
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 6, true);
+
+
+--
+-- Name: cookies cookies_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cookies
+    ADD CONSTRAINT cookies_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: websites websites_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.websites
+    ADD CONSTRAINT websites_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: cookies cookies_website_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.cookies
+    ADD CONSTRAINT cookies_website_id_fkey FOREIGN KEY (website_id) REFERENCES public.websites(id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+

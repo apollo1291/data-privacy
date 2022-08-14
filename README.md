@@ -1,4 +1,4 @@
-# <img src="Frontend\src\databaseWhite.png" width="25" height="25"> DATALINK
+# <img src="Frontend\src\databaseIconWhite.png" width="25" height="25"> DATALINK
 
 A prototype for an app that serves as a data-privacy information hub 
 

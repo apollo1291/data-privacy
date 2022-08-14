@@ -2,9 +2,13 @@
   "name": "data-privacy",
   "version": "1.0.0",
   "main": "server.js",
+  "engines": {
+    "node": "16.15.1",
+    "npm": "8.11.0"
+  },
   "scripts": {
-    "start": "node server.bundle.js",
-    "build": "webpack",
+    "start": "node Server.js",
+    "heroku-postbuild": "cd Frontend && npm install && npm run build",
     "dev": "nodemon ./server.js localhost 3080"
   },
   "dependencies": {

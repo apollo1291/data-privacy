@@ -1,11 +1,11 @@
-const fetchCookies = async (url) => {
+export const fetchCookies = async (url) => {
     /**
      * @desc: Sends a Post req containing the url in the body 
      * to /api/cookies and waits for a response from the server 
      * @param: url -> the url the user selected
      * @return: ratings -> an array of object containing the cookies associated with the url 
      */
-  const cookieResponse = await fetch("http://localhost:3080/api/cookies", {
+const cookieResponse = await fetch("/api/cookies", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url: url }),
@@ -16,14 +16,14 @@ const fetchCookies = async (url) => {
   return cookies;
 };
 
-const fetchRatings = async (url) => {
+export const fetchRatings = async (url) => {
      /**
      * @desc: Sends a Post req containing the url in the body 
      * to /api/ratings and waits for a response from the server 
      * @param: url => the url the user selected
      * @return: ratings => an object containing the ratings associated with the url 
      */
-  const ratingsResponse = await fetch("http://localhost:3080/api/ratings", {
+  const ratingsResponse = await fetch("/api/ratings", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ url: url }),
@@ -34,7 +34,7 @@ const fetchRatings = async (url) => {
   return ratings;
 };
 
-const getColor = (rating) => {
+export const getColor = (rating) => {
   /**
    * @desc: chooses which color corresponds to a rating. green for good, yellow for mid, red for bad
    * @param: rating => the rating to be colored
@@ -53,7 +53,7 @@ const getColor = (rating) => {
   return 'red'
 }
 
-const getWidth = (rating) => {
+export const getWidth = (rating) => {
   /**
    * @desc: provdies the width, in percentage,for a rating bar
    * @param: rating => the rating to assess
@@ -65,9 +65,9 @@ const getWidth = (rating) => {
   return (rating / 33 * 100).toString() + '%'
 }
 
-module.exports = {
+/*module.exports = {
   fetchCookies,
   fetchRatings,
   getColor,
   getWidth
-};
+};*/

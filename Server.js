@@ -18,13 +18,12 @@ app.listen(PORT, () => {
 
 app.use(bodyParser.json());
 app.use(cors());
-// delete for production
-app.use(express.static(path.join(__dirname, "Frontend/build")))
 
 if(process.env.NODE_ENV === "production"){
   //sever static content
   app.use(express.static(path.join(__dirname, "Frontend/build")))
 }
+
 
 // user
 app.get("/api/u", userQuery.getUsers);

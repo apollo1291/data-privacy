@@ -24,7 +24,7 @@ export async function authUser(data) {
      * @return: user -> if successful an object with the username and id, an empty array otherwise
      */
     
-    const response = await fetch("/auth", {
+    const response = await fetch("/api/auth", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({user: data})

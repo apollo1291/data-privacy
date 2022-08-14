@@ -9,7 +9,7 @@ const devConfig ={
   port: process.env.PG_PORT,
 };
 
-const proConfig ={
+const proConfig = {
     connectionString: process.env.DATABASE_URL //heroku addons
 }
 const pool = new Pool(

@@ -7,13 +7,13 @@ const cookieQuery = require("./Queries/cookieQueries")
 const app = express(),
   bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3080;
-const db = process.env.DATABASE_URI
+const db = process.env.DATABASE_URL
 
 //process.env.PORT
 //process.env.NODE_ENV
 
 app.listen(PORT, () => {
-  console.log(`Server listen on the port::${PORT} 
+  console.log(`Server listening on the port::${PORT} 
    db = ${db}`);
 });
 

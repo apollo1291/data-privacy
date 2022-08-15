@@ -41,7 +41,7 @@ const authUser = (req, res) =>{
    * @return:if authorized, a json object with the users username and id, otherwise an empty array
    */
   const {username, password} = req.body.user
-
+  console.log(pool)
   pool.query("SELECT username, id FROM users WHERE username = $1 AND password = $2", [username, password], (error, results) => {
     if (error){
       throw error

@@ -10,12 +10,7 @@ const devConfig ={
 };
 
 const proConfig = {
-    // connectionString: process.env.DATABASE_URL + '?ssl=true' //heroku addons
-  user: process.env.User,
-  host: process.env.Host,
-  database: process.env.Database,
-  password: process.env.Password,
-  port: process.env.Port,
+    connectionString: process.env.DATABASE_URL + '?ssl=true' //heroku addons
 }
 console.log('pool.js before error?')
 const pool = new Pool(

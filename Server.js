@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3080;
 //process.env.NODE_ENV
 
 app.listen(PORT, () => {
-  console.log(`Server listening on the port::${PORT}`);
+  console.log(`Server listen on the port::${PORT}`);
 });
 
 

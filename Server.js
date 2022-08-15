@@ -7,7 +7,7 @@ const cookieQuery = require("./Queries/cookieQueries")
 const app = express(),
   bodyParser = require("body-parser");
 const PORT = process.env.PORT || 3080;
-const db = process.env.DATABASE_URL
+const db = process.env.DATABASE_URI
 
 //process.env.PORT
 //process.env.NODE_ENV

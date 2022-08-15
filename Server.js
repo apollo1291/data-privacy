@@ -11,12 +11,15 @@ const PORT = process.env.PORT || 3080;
 //process.env.PORT
 //process.env.NODE_ENV
 
+app.listen(PORT, () => {
+  console.log(`Server listening on the port::${PORT}`);
+});
 
 
 app.use(bodyParser.json());
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, "Frontend/build")))
+
 if(process.env.NODE_ENV === "production"){
   //sever static content
   app.use(express.static(path.join(__dirname, "Frontend/build")))

@@ -12,8 +12,10 @@ const devConfig ={
 const proConfig = {
     connectionString: process.env.DATABASE_URL + '?ssl=true' //heroku addons
 }
+console.log('pool.js before error?')
 const pool = new Pool(
     process.env.NODE_ENV === "production" ? proConfig : devConfig
 );
+console.log('pool.js after error')
 
 module.exports = pool

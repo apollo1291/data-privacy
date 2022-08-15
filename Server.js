@@ -11,19 +11,12 @@ const PORT = process.env.PORT || 3080;
 //process.env.PORT
 //process.env.NODE_ENV
 
-// for an express app, the server is returned from the `.listen()` method
-let server = app.listen();
-
-server.on('clientError', (err, socket) => {
-  console.error(err);
-  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
-});
 
 
 app.use(bodyParser.json());
 app.use(cors());
 
-
+app.use(express.static(path.join(__dirname, "Frontend/build")))
 if(process.env.NODE_ENV === "production"){
   //sever static content
   app.use(express.static(path.join(__dirname, "Frontend/build")))

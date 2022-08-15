@@ -11,8 +11,12 @@ const PORT = process.env.PORT || 3080;
 //process.env.PORT
 //process.env.NODE_ENV
 
-app.listen(PORT, () => {
-  console.log(`Server listening on the port::${PORT}`);
+// for an express app, the server is returned from the `.listen()` method
+let server = app.listen();
+
+server.on('clientError', (err, socket) => {
+  console.error(err);
+  socket.end('HTTP/1.1 400 Bad Request\r\n\r\n');
 });
 
 

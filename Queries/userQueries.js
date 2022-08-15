@@ -1,6 +1,5 @@
 const validation = require('../userValidation')
 const pool = require('../pool.js')
-const { Client } = require('pg');
 
 const createUser = (req, res) => {
   /**
@@ -41,23 +40,15 @@ const authUser = (req, res) =>{
    * @param: res.body.user => an object contains username and password
    * @return:if authorized, a json object with the users username and id, otherwise an empty array
    */
-
-   const client = new Client({
-    connectionString: process.env.DATABASE_URL
-  })
   const {username, password} = req.body.user
 
-  client.connect()
-
-  client.query("SELECT username, id FROM users WHERE username = $1 AND password = $2", [username, password], (error, results) => {
+  pool.query("SELECT username, id FROM users WHERE username = $1 AND password = $2", [username, password], (error, results) => {
     if (error){
       throw error
     }
     
     res.json(results.rows)
   })
-
-  client.end()
 }
 
 

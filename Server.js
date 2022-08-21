@@ -13,8 +13,7 @@ const db = process.env.DATABASE_URL
 //process.env.NODE_ENV
 
 app.listen(PORT, () => {
-  console.log(`Server listening on the port::${PORT} 
-   db = ${db}`);
+  console.log(`Server listening on the port::${PORT}`);
 });
 
 

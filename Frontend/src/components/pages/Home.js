@@ -15,7 +15,7 @@ export const Home = (props) => {
          * @params event -> an html event in the search bar, typing deleting etc
          * @returns nothing -> sets the state of the component to the search
          */
-        setState({ userSearch: event.target.value });
+        setState({ userSearch: event.target.value.toLowerCase() });
     };
 
     return (

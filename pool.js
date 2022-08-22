@@ -1,6 +1,7 @@
 require('dotenv').config()
 const Pool = require("pg").Pool;
 
+//development database connection
 const devConfig ={
   user: process.env.PG_USER,
   host: process.env.PG_HOST,
@@ -9,6 +10,7 @@ const devConfig ={
   port: process.env.PG_PORT,
 };
 
+//production database coonection and configuration
 const proConfig = {
     connectionString: process.env.DATABASE_URL, //heroku addons
     ssl: { rejectUnauthorized: false }

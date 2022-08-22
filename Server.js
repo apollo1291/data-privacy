@@ -16,11 +16,11 @@ app.listen(PORT, () => {
   console.log(`Server listening on the port::${PORT}`);
 });
 
-
+//middleware
 app.use(bodyParser.json());
 app.use(cors());
 
-
+// in production host the build folder within this server
 if(process.env.NODE_ENV === "production"){
   //sever static content
   app.use(express.static(path.join(__dirname, "Frontend/build")))

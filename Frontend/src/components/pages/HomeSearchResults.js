@@ -31,7 +31,7 @@ export const HomeSearchResults = (props) => {
                 return;
             }
             // request the website data from the backend
-            const matches = await fetch('http://localhost:3080/api/websites', {
+            const matches = await fetch('/api/websites', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ search: userSearch })

@@ -1,14 +1,5 @@
 const validation = require('../userValidation')
-require('dotenv').config()
-
-const Pool = require("pg").Pool;
-const pool = new Pool({
-  user: process.env.user,
-  host: process.env.host,
-  database: process.env.database,
-  password: process.env.password,
-  port: process.env.port,
-});
+const pool = require('../pool.js')
 
 const createUser = (req, res) => {
   /**
@@ -50,7 +41,7 @@ const authUser = (req, res) =>{
    * @return:if authorized, a json object with the users username and id, otherwise an empty array
    */
   const {username, password} = req.body.user
-
+  console.log(pool)
   pool.query("SELECT username, id FROM users WHERE username = $1 AND password = $2", [username, password], (error, results) => {
     if (error){
       throw error

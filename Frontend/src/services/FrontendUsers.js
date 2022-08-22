@@ -7,7 +7,7 @@
      * @return: response => the reponse from the server, either username and id indicating succsess,
      * or false indicating failure
      */
-    const response = await fetch('http://localhost:3080/api/user', {
+    const response = await fetch('/api/user', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({user: data})
@@ -24,7 +24,7 @@ export async function authUser(data) {
      * @return: user -> if successful an object with the username and id, an empty array otherwise
      */
     
-    const response = await fetch("http://localhost:3080/api/auth", {
+    const response = await fetch("/api/auth", {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({user: data})

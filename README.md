@@ -22,7 +22,7 @@ Future features:
 
 ## Getting Started
 
-This project is currently very dependent on my local machine and not ready for outside use. In the future, I will migrate database, and backend to a Web Server.
+Hosted on heroku. Access prototype: [Datalink](https://datalink-cookiereport.herokuapp.com/)
 
 ## To-do:
  - Add ability to click on sites to get in-depth cookie report, rather than just one dimensional rating (build react page structure, and db query to get cookie info)

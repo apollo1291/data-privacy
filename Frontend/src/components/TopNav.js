@@ -25,6 +25,10 @@ export function TopNav(props) {
 
         </div>
 
+        <div style={{color: 'blue'}}>
+          <button onClick={ () => {props.changePage({...props.appState, Page: "Login", url: null })}}>Sign in </button>
+        </div>
+
       </div>
     </>
   );

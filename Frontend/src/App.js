@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MainPage } from './components/MainPage';
 import { LoginPage } from './components/pages/Login'
 
@@ -13,18 +13,23 @@ function App(){
     Page: "Home",
     url: null
   })
-  
-    if (user.user){
-      return (
-      <div className="App">
-      
-      <MainPage appState = { state } setAppState = { setState }/>
-      </div>
-        
-    )}
+  useEffect(() => { 
+    const setHome = async () => {
+      if (user.user){
+        setState({
+        Page: "Home",
+        url: null
+      })
+      }
+    };
+    setHome();
+}, [user]);
     
-    return(
-      <LoginPage appState = { user } setAppState = { setUser }/>
+   return (
+    <div className="App">
+    
+    <MainPage user = { user } setUser ={ setUser } appState = { state } setAppState = { setState }/>
+    </div>
     )
 
 }

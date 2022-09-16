@@ -2,6 +2,7 @@ import { CookieReport } from "./pages/CookieReport"
 import { TopNav } from './TopNav';
 import { About } from "./pages/About"
 import { Home } from "./pages/Home"
+import { LoginPage } from "./pages/Login"
 
 /**
  * Contains component to control 
@@ -13,7 +14,8 @@ export function MainPage(props){
     const Pages ={
       'Home': <Home appState = { props.appstate } setAppState = { props.setAppState } />,
       'About': <About />,
-      'cookieReport': <CookieReport url = { props.appState.url } setAppState = { props.setAppState }/>
+      'cookieReport': <CookieReport url = { props.appState.url } setAppState = { props.setAppState }/>,
+      'Login': <LoginPage appState = { props.user } setUser = { props.setUser }/>
     }
   
     const renderState = () => {

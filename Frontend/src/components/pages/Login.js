@@ -54,7 +54,8 @@ export function LoginPage(props){
         if(auth.length !== 0){
 
         window.sessionStorage.setItem("user", JSON.stringify(auth))
-        props.setAppState({...props.appState, user: auth})
+        props.setUser({ user: auth})
+        
     }
     else{
         alert("invalid username or password")
@@ -101,7 +102,7 @@ export function LoginPage(props){
             return
         }
         
-        props.setAppState({...props.appState, user: user.username})
+        props.setUser({user: user.username})
 
         
 

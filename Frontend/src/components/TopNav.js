@@ -18,15 +18,15 @@ export function TopNav(props) {
         <div className='nav'>
           <p id="name"><img src={require("../assets/databaseIconWhite.png") } alt=''></img>Data-Link</p>
           <ul>
-            <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} />
-            <MenuOption name={"About"} appState = { props.appState } changePage={props.changePage} />
+            {/* <MenuOption name={"Home"} appState = { props.appState } changePage={props.changePage} /> */}
+            {/* <MenuOption name={"About"} appState = { props.appState } changePage={props.changePage} /> */}
   
           </ul>
 
         </div>
 
-        <div style={{color: 'blue'}}>
-          <button onClick={ () => {props.changePage({...props.appState, Page: "Login", url: null })}}>Sign in </button>
+        <div id='sign_in_div'>
+          <button id='sign_in'onClick={ () => {props.changePage({...props.appState, Page: "Login", url: null })}}> Sign in </button>
         </div>
 
       </div>

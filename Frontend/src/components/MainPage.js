@@ -27,7 +27,13 @@ export function MainPage(props){
        * @return: { html webpage } 
        * 
        * **/
-      if (!props.appState.url){
+      
+       if(props.appState.Page === 'Login'){
+        return <>
+        {Pages[props.appState.Page]}
+        </>
+      }
+      if (!props.appState.url && props.appState.Page !== 'Login'){
 
         return <>
         <TopNav appState = { props.appstate} changePage = {props.setAppState}/>

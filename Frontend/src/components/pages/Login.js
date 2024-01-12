@@ -119,7 +119,7 @@ export function LoginPage(props){
             <label>Username:</label>
             </div>
             <div className='loginField'>
-                <input id='userlogin' type='text' placeholder='Enter username' onChange={event => handleLoginChange(event)}></input>
+                <input id='userlogin' type='text' placeholder='Enter username' onChange={event =>handleLoginChange(event)}></input>
             </div>
         
             <div className='label'>
